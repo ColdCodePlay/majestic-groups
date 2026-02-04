@@ -25,7 +25,6 @@ import EntitySelectorPage from './pages/EntitySelectorPage';
 import VaultPage from './pages/Vault';
 import NameGeneratorPage from './pages/NameGeneratorPage';
 import EquityCalculatorPage from './pages/EquityCalculatorPage';
-import TrademarkSearchPage from './pages/TrademarkSearchPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminServices from './pages/admin/AdminServices';
 import AdminPricing from './pages/admin/AdminPricing';
@@ -56,7 +55,6 @@ const Navbar = () => {
       children: [
         { name: 'Name Generator', path: '/name-generator' },
         { name: 'Equity Calculator', path: '/equity-calculator' },
-        { name: 'Trademark Search', path: '/trademark-search' },
         { name: 'Entity Selector', path: '/entity-selector' },
         { name: 'Launchpad', path: '/launchpad' },
       ]
@@ -320,7 +318,6 @@ const AppContent = () => {
           <Route path="/vault" element={<VaultPage />} />
           <Route path="/name-generator" element={<NameGeneratorPage />} />
           <Route path="/equity-calculator" element={<EquityCalculatorPage />} />
-          <Route path="/trademark-search" element={<TrademarkSearchPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/launchpad" element={<Launchpad />} />
