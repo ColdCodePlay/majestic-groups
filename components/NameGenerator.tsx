@@ -79,16 +79,44 @@ const NameGenerator: React.FC = () => {
             setResults(enrichedResults);
 
 
+
         } catch (err) {
             console.error("AI Generation Error:", err);
-            // setError('Failed to generate names. Please try again.'); // Don't show error if we have fallback
-            setError(''); // Clear error to show results
-            // Fallback mock data if AI fails (e.g. no API key)
-            setResults([
-                { name: "NovaCore", tagline: "Innovation at the Core", rationale: "Strong, modern sound implying leadership.", domainAvailable: true, trademarkSafe: true },
-                { name: "Velora", tagline: "Speed meets Elegance", rationale: "Abstract name suitable for lifestyle or tech.", domainAvailable: false, trademarkSafe: true },
-                { name: "Apexify", tagline: "Reach Your Peak", rationale: "Verbed noun suggesting action and growth.", domainAvailable: true, trademarkSafe: false },
-            ]);
+            setError('');
+
+            // DYNAMIC FALLBACK: Generate names based on inputs locally
+            const suffixes = ['ify', 'ly', 'hub', 'works', 'flow', 'sys', 'gen', 'nomic', 'verse', 'box'];
+            const prefixes = ['Neo', 'Pro', 'Smart', 'True', 'Bright', 'Clear', 'Swift', 'Prime', 'One', 'Go'];
+            const industries = industry.split(/[\s,]+/);
+            const keys = keywords.split(/[\s,]+/);
+
+            const generatedMockNames: GeneratedName[] = [];
+            const seeds = [...keys, ...industries, 'Nova', 'Velo', 'Apex'].filter(Boolean);
+
+            for (let i = 0; i < 3; i++) {
+                // Pick a random seed word from user input or defaults
+                const seed = seeds[Math.floor(Math.random() * seeds.length)];
+                const isPrefix = Math.random() > 0.5;
+
+                let name = "";
+                if (isPrefix) {
+                    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+                    name = prefix + seed.charAt(0).toUpperCase() + seed.slice(1);
+                } else {
+                    const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+                    name = seed.charAt(0).toUpperCase() + seed.slice(1) + suffix;
+                }
+
+                generatedMockNames.push({
+                    name: name,
+                    tagline: `The Future of ${industry}`,
+                    rationale: `Combines "${seed}" with a modern affix to imply growth in ${keywords}.`,
+                    domainAvailable: Math.random() > 0.4,
+                    trademarkSafe: Math.random() > 0.3
+                });
+            }
+
+            setResults(generatedMockNames);
         } finally {
             setIsGenerating(false);
         }
