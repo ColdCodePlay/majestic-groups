@@ -56,7 +56,7 @@ const Navbar = () => {
   const shouldShowDarkNav = scrolled || isOpen || !isDarkHeroPage;
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${shouldShowDarkNav ? 'bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm py-2' : 'bg-transparent py-4'
+    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${shouldShowDarkNav ? 'bg-white/70 backdrop-blur-2xl border-b border-white/20 shadow-lg shadow-indigo-100/10 py-2' : 'bg-transparent py-4'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
@@ -65,7 +65,7 @@ const Navbar = () => {
               <img
                 src="/logo_main.png"
                 alt="Majestic Groups"
-                className="h-16 sm:h-20 w-auto object-contain transition-all hover:scale-105"
+                className="h-16 sm:h-20 w-auto object-contain transition-all duration-500 group-hover:drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]"
               />
             </Link>
           </div>
@@ -76,8 +76,8 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${location.pathname === link.path
-                  ? 'text-indigo-600 bg-indigo-50'
-                  : (shouldShowDarkNav ? 'text-slate-600 hover:text-indigo-600 hover:bg-gray-50' : 'text-white/80 hover:text-white hover:bg-white/10')
+                  ? 'text-indigo-600 bg-indigo-50/80 shadow-inner'
+                  : (shouldShowDarkNav ? 'text-slate-600 hover:text-indigo-600 hover:bg-white/50' : 'text-white/80 hover:text-white hover:bg-white/10')
                   }`}
               >
                 {link.name}
@@ -85,9 +85,10 @@ const Navbar = () => {
             ))}
             <Link
               to="/contact"
-              className="ml-4 bg-indigo-600 text-white px-6 py-2.5 rounded-xl text-sm font-black hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/30 hover:scale-105 active:scale-95"
+              className="ml-4 relative overflow-hidden bg-indigo-600 text-white px-6 py-2.5 rounded-xl text-sm font-black hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/30 hover:scale-105 active:scale-95 group"
             >
-              Get Started
+              <span className="relative z-10">Get Started</span>
+              <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"></div>
             </Link>
           </div>
 
