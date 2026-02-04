@@ -19,6 +19,9 @@ import Pricing from './pages/Pricing';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Launchpad from './pages/Launchpad';
+import Compliance from './pages/Compliance';
+import EntitySelectorPage from './pages/EntitySelectorPage';
+import VaultPage from './pages/Vault';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminServices from './pages/admin/AdminServices';
 import AdminPricing from './pages/admin/AdminPricing';
@@ -40,14 +43,15 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
     { name: 'Services', path: '/services' },
+    { name: 'Compliance', path: '/compliance' },
     { name: 'Pricing', path: '/pricing' },
-    { name: 'Startup Launchpad', path: '/launchpad' },
+    { name: 'Launchpad', path: '/launchpad' },
+    { name: 'Vault', path: '/vault' },
     { name: 'Contact', path: '/contact' },
   ];
 
-  const isDarkHeroPage = location.pathname === '/' || location.pathname === '/services' || location.pathname === '/about' || location.pathname === '/contact';
+  const isDarkHeroPage = location.pathname === '/' || location.pathname === '/services' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname === '/compliance';
   const shouldShowDarkNav = scrolled || isOpen || !isDarkHeroPage;
 
   return (
@@ -57,13 +61,11 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16 md:h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 group">
-              <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center group-hover:rotate-6 transition-transform shadow-lg shadow-indigo-600/20">
-                <span className="text-white font-bold text-xl">M</span>
-              </div>
-              <span className={`text-xl md:text-2xl font-black tracking-tight transition-colors ${shouldShowDarkNav ? 'text-slate-900' : 'text-white'
-                }`}>
-                Majestic <span className="text-indigo-600">Groups</span>
-              </span>
+              <img
+                src="/logo_main.png"
+                alt="Majestic Groups"
+                className="h-16 sm:h-20 w-auto object-contain transition-all hover:scale-105"
+              />
             </Link>
           </div>
 
@@ -253,6 +255,9 @@ const AppContent = () => {
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/compliance" element={<Compliance />} />
+          <Route path="/entity-selector" element={<EntitySelectorPage />} />
+          <Route path="/vault" element={<VaultPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/launchpad" element={<Launchpad />} />

@@ -48,13 +48,14 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <aside className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-900 text-white flex flex-col h-screen transition-transform duration-300 ease-in-out md:translate-x-0 md:sticky md:top-0 ${isMobileMenuOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
                 }`}>
                 <div className="p-8 border-b border-slate-800 flex items-center justify-between">
-                    <Link to="/" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg shadow-indigo-600/20">
-                            <span className="text-white font-bold text-xl">M</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-lg font-black tracking-tight">Majestic</span>
-                            <span className="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.2em] -mt-1">Admin Panel</span>
+                    <Link to="/" className="flex flex-col items-center gap-4 group mb-4">
+                        <img
+                            src="/logo_main.png"
+                            alt="Majestic Admin"
+                            className="h-20 w-auto object-contain bg-white rounded-xl p-2 shadow-lg"
+                        />
+                        <div className="flex flex-col items-center">
+                            <span className="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.2em]">Admin Panel</span>
                         </div>
                     </Link>
                     <button
