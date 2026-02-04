@@ -10,7 +10,8 @@ import {
   Twitter,
   Linkedin,
   ArrowRight,
-  Bot
+  Bot,
+  ChevronDown // Added ChevronDown
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Home from './pages/Home';
@@ -35,6 +36,7 @@ import AIAssistant from './components/AIAssistant';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null); // Track active dropdown
   const location = useLocation();
 
   useEffect(() => {
@@ -47,10 +49,19 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
     { name: 'Compliance', path: '/compliance' },
+    {
+      name: 'Tools',
+      path: '#',
+      children: [
+        { name: 'Name Generator', path: '/name-generator' },
+        { name: 'Equity Calculator', path: '/equity-calculator' },
+        { name: 'Entity Selector', path: '/entity-selector' },
+        { name: 'Launchpad', path: '/launchpad' },
+      ]
+    },
     { name: 'Pricing', path: '/pricing' },
-    { name: 'Launchpad', path: '/launchpad' },
     { name: 'Vault', path: '/vault' },
-    { name: 'Contact', path: '/contact' },
+    // { name: 'Contact', path: '/contact' }, // Moved Contact to CTA
   ];
 
   const isDarkHeroPage = location.pathname === '/' || location.pathname === '/services' || location.pathname === '/about' || location.pathname === '/contact' || location.pathname === '/compliance';
@@ -73,16 +84,39 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${location.pathname === link.path
-                  ? 'text-indigo-600 bg-indigo-50/80 shadow-inner'
-                  : (shouldShowDarkNav ? 'text-slate-600 hover:text-indigo-600 hover:bg-white/50' : 'text-white/80 hover:text-white hover:bg-white/10')
-                  }`}
-              >
-                {link.name}
-              </Link>
+              <div key={link.name} className="relative group">
+                {link.children ? (
+                  <button
+                    className={`px-4 py-2 text-sm font-bold rounded-lg transition-all flex items-center gap-1 group
+                      ${shouldShowDarkNav ? 'text-slate-600 hover:text-indigo-600 hover:bg-white/50' : 'text-white/80 hover:text-white hover:bg-white/10'}
+                    `}
+                  >
+                    {link.name} <ChevronDown className="w-4 h-4" />
+                    {/* Dropdown Menu */}
+                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left">
+                      {link.children.map(child => (
+                        <Link
+                          key={child.path}
+                          to={child.path}
+                          className="block px-4 py-3 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 font-bold text-sm transition-colors"
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </button>
+                ) : (
+                  <Link
+                    to={link.path}
+                    className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${location.pathname === link.path
+                      ? 'text-indigo-600 bg-indigo-50/80 shadow-inner'
+                      : (shouldShowDarkNav ? 'text-slate-600 hover:text-indigo-600 hover:bg-white/50' : 'text-white/80 hover:text-white hover:bg-white/10')
+                      }`}
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </div>
             ))}
             <Link
               to="/contact"
@@ -116,22 +150,43 @@ const Navbar = () => {
           >
             <div className="px-4 py-6 space-y-1">
               {navLinks.map((link, idx) => (
-                <motion.div
-                  key={link.path}
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: idx * 0.05 }}
-                >
-                  <Link
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center justify-between px-4 py-4 text-lg font-black rounded-2xl transition-all ${location.pathname === link.path ? 'bg-indigo-50 text-indigo-600' : 'text-slate-600 active:bg-gray-50'
-                      }`}
-                  >
-                    {link.name}
-                    <ArrowRight className={`w-5 h-5 ${location.pathname === link.path ? 'opacity-100' : 'opacity-20'}`} />
-                  </Link>
-                </motion.div>
+                <div key={link.name}>
+                  {link.children ? (
+                    <div className="space-y-1">
+                      <div className="px-4 py-4 text-lg font-black text-slate-800 opacity-60 flex items-center gap-2">
+                        {link.name} <ChevronDown className="w-4 h-4" />
+                      </div>
+                      <div className="pl-4 border-l-2 border-slate-100 ml-4 space-y-1">
+                        {link.children.map(child => (
+                          <Link
+                            key={child.path}
+                            to={child.path}
+                            onClick={() => setIsOpen(false)}
+                            className="block px-4 py-3 text-slate-600 font-bold hover:text-indigo-600"
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <motion.div
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: idx * 0.05 }}
+                    >
+                      <Link
+                        to={link.path}
+                        onClick={() => setIsOpen(false)}
+                        className={`flex items-center justify-between px-4 py-4 text-lg font-black rounded-2xl transition-all ${location.pathname === link.path ? 'bg-indigo-50 text-indigo-600' : 'text-slate-600 active:bg-gray-50'
+                          }`}
+                      >
+                        {link.name}
+                        <ArrowRight className={`w-5 h-5 ${location.pathname === link.path ? 'opacity-100' : 'opacity-20'}`} />
+                      </Link>
+                    </motion.div>
+                  )}
+                </div>
               ))}
               <motion.div
                 initial={{ y: 20, opacity: 0 }}

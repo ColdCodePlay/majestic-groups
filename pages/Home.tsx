@@ -22,7 +22,9 @@ import {
   ShieldCheck,
   TrendingUp,
   Gavel,
-  FileText
+  FileText,
+  Lightbulb,
+  PieChart
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -303,6 +305,70 @@ const Home: React.FC = () => {
                 </Link>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Free Startup Tools Section */}
+      <section className="py-24 bg-slate-900 overflow-hidden relative border-t border-slate-800">
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-indigo-600/20 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center gap-2 bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest backdrop-blur-md">
+              <Rocket className="w-4 h-4" />
+              For Founders
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">Free Startup Utilities</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+              Powerful tools to help you plan, structure, and launch your business. No signup required.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Tool 1: Name Generator */}
+            <Link to="/name-generator" className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-10 hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
+                <Lightbulb className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-black text-white mb-4">AI Name Generator</h3>
+              <p className="text-slate-400 mb-8 leading-relaxed">
+                Generate unique, memorable business names tailored to your industry and keywords using advanced AI.
+              </p>
+              <span className="text-indigo-400 font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                Try Generator <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
+
+            {/* Tool 2: Equity Calculator */}
+            <Link to="/equity-calculator" className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-10 hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-pink-500/20 group-hover:scale-110 transition-transform">
+                <PieChart className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-black text-white mb-4">Equity Split Calculator</h3>
+              <p className="text-slate-400 mb-8 leading-relaxed">
+                Fairly distribute co-founder equity based on contributions like ideas, capital, and commitment.
+              </p>
+              <span className="text-pink-400 font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                Calculate Split <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
+
+            {/* Tool 3: Entity Selector */}
+            <Link to="/entity-selector" className="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-10 hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+              <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform">
+                <ShieldCheck className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-black text-white mb-4">Entity Selector</h3>
+              <p className="text-slate-400 mb-8 leading-relaxed">
+                Not sure if you need a Pvt Ltd or LLP? Take our quiz to find the perfect legal structure for your startup.
+              </p>
+              <span className="text-emerald-400 font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                Take Quiz <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
           </div>
         </div>
       </section>
