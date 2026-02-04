@@ -1,7 +1,6 @@
-
 import React, { useEffect } from 'react';
-import EntitySelectorQuiz from '../components/EntitySelectorQuiz';
-import { motion } from 'framer-motion';
+import EntitySelector from '../components/EntitySelector';
+import { ShieldCheck } from 'lucide-react';
 
 const EntitySelectorPage: React.FC = () => {
     useEffect(() => {
@@ -9,25 +8,24 @@ const EntitySelectorPage: React.FC = () => {
     }, []);
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="pt-16"
-        >
-            <div className="bg-slate-900 text-white pt-24 pb-12 px-4 text-center relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-                    <div className="absolute w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl -top-20 right-0"></div>
-                    <div className="absolute w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl bottom-0 left-0"></div>
-                </div>
-                <div className="relative z-10 max-w-4xl mx-auto space-y-4">
-                    <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-4">Structure Strategy Tool</h1>
-                    <p className="text-xl text-slate-300">Don't guess. Let our algorithm find your ideal legal foundation.</p>
-                </div>
-            </div>
+        <div className="pt-20 min-h-screen bg-slate-50/50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
 
-            <EntitySelectorQuiz />
-        </motion.div>
+                <div className="inline-flex items-center justify-center p-3 bg-emerald-100 rounded-2xl mb-6">
+                    <ShieldCheck className="w-8 h-8 text-emerald-600" />
+                </div>
+
+                <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
+                    Find Your Perfect Structure
+                </h1>
+                <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-16 leading-relaxed">
+                    Not sure if you should register as a Pvt Ltd, LLP, or OPC?
+                    Answer 3 simple questions to get an instant recommendation.
+                </p>
+
+                <EntitySelector />
+            </div>
+        </div>
     );
 };
 
