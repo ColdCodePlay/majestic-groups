@@ -80,41 +80,117 @@ const NameGenerator: React.FC = () => {
 
 
 
+
         } catch (err) {
             console.error("AI Generation Error:", err);
             setError('');
 
-            // DYNAMIC FALLBACK: Generate names based on inputs locally
-            const suffixes = ['ify', 'ly', 'hub', 'works', 'flow', 'sys', 'gen', 'nomic', 'verse', 'box'];
-            const prefixes = ['Neo', 'Pro', 'Smart', 'True', 'Bright', 'Clear', 'Swift', 'Prime', 'One', 'Go'];
-            const industries = industry.split(/[\s,]+/);
-            const keys = keywords.split(/[\s,]+/);
+            // SOPHISTICATED FALLBACK ALGORITHM
+            // 1. Analyze Context
+            const text = (industry + ' ' + keywords).toLowerCase();
+            let category = 'general';
+            if (/(tech|soft|app|data|cyber|code|web|net|ai|smart)/.test(text)) category = 'tech';
+            else if (/(finance|money|invest|bank|coin|wealth|fund|pay)/.test(text)) category = 'finance';
+            else if (/(health|med|care|fit|bio|doctor|wellness)/.test(text)) category = 'health';
+            else if (/(green|eco|nature|planet|solar|env|sustain)/.test(text)) category = 'green';
+            else if (/(food|eat|cook|tasty|kitchen|chef|cafe)/.test(text)) category = 'food';
+            else if (/(art|design|creative|studio|fash|style)/.test(text)) category = 'creative';
 
+            // 2. Define Vocabularies
+            const vocab: Record<string, { prefixes: string[], suffixes: string[], adjectives: string[] }> = {
+                tech: {
+                    prefixes: ['Cyber', 'Digi', 'Neo', 'Syn', 'Net', 'Data', 'Quant', 'Virtup', 'Omni'],
+                    suffixes: ['sys', 'io', 'soft', 'bot', 'node', 'sync', 'ware', 'lab', 'ai', 'ops'],
+                    adjectives: ['Smart', 'Rapid', 'Virtual', 'Liquid', 'Hyper', 'Auto']
+                },
+                finance: {
+                    prefixes: ['Fin', 'Cap', 'Wealth', 'Cred', 'Pay', 'Coin', 'Mone', 'Accu', 'Trea'],
+                    suffixes: ['vest', 'bank', 'fund', 'wallet', 'base', 'capital', 'ly', 'flow'],
+                    adjectives: ['Secure', 'Golden', 'Prime', 'Trust', 'Fiscal']
+                },
+                health: {
+                    prefixes: ['Medi', 'Vita', 'Bio', 'Nutri', 'Cura', 'Heal', 'Physio'],
+                    suffixes: ['care', 'life', 'med', 'well', 'path', 'genic', 'plus'],
+                    adjectives: ['Vital', 'Pure', 'Active', 'Holistic', 'Safe']
+                },
+                green: {
+                    prefixes: ['Eco', 'Enviro', 'Bio', 'Natur', 'Sustain', 'Verd', 'Solar'],
+                    suffixes: ['cycle', 'earth', 'leaf', 'bloom', 'roots', 'gen', 'sphere'],
+                    adjectives: ['Clean', 'Green', 'Pure', 'Re', 'Fresh']
+                },
+                food: {
+                    prefixes: ['Culi', 'Gourmet', 'Chef', 'Yum', 'Zest', 'Deli'],
+                    suffixes: ['bites', 'eats', 'dash', 'kitchen', 'hub', 'spot', 'fest'],
+                    adjectives: ['Tasty', 'Fresh', 'Hot', 'Crispy', 'Sweet', 'Spicy']
+                },
+                general: {
+                    prefixes: ['Pro', 'Ex', 'Nov', 'Unit', 'Glob', 'Intell', 'Max'],
+                    suffixes: ['ify', 'ly', 'hub', 'works', 'box', 'zone', 'mate', 'hq'],
+                    adjectives: ['Great', 'New', 'Top', 'Best', 'True']
+                }
+            };
+
+            const selectedVocab = vocab[category] || vocab.general;
+
+            // Mix general into specific for variety
+            const finalPrefixes = [...selectedVocab.prefixes, ...vocab.general.prefixes];
+            const finalSuffixes = [...selectedVocab.suffixes, ...vocab.general.suffixes];
+            const finalAdjectives = [...selectedVocab.adjectives, ...vocab.general.adjectives];
+
+            const inputs = [...keywords.split(/[\s,]+/), ...industry.split(/[\s,]+/)]
+                .filter(s => s.length > 2) // Ignore tiny words
+                .map(s => s.replace(/[^a-zA-Z]/g, '')); // Clean punctuation
+
+            const seedRaw = inputs.length > 0
+                ? inputs[Math.floor(Math.random() * inputs.length)]
+                : (category === 'general' ? 'Brand' : category);
+
+            // 3. Generation Loop
             const generatedMockNames: GeneratedName[] = [];
-            const seeds = [...keys, ...industries, 'Nova', 'Velo', 'Apex'].filter(Boolean);
+            const strategies = [0, 1, 2, 3, 4].sort(() => 0.5 - Math.random()).slice(0, 3);
 
-            for (let i = 0; i < 3; i++) {
-                // Pick a random seed word from user input or defaults
-                const seed = seeds[Math.floor(Math.random() * seeds.length)];
-                const isPrefix = Math.random() > 0.5;
+            strategies.forEach((strat, idx) => {
+                const currentSeed = inputs[idx % inputs.length] || seedRaw;
+                const seedCap = currentSeed.charAt(0).toUpperCase() + currentSeed.slice(1).toLowerCase();
 
                 let name = "";
-                if (isPrefix) {
-                    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-                    name = prefix + seed.charAt(0).toUpperCase() + seed.slice(1);
-                } else {
-                    const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
-                    name = seed.charAt(0).toUpperCase() + seed.slice(1) + suffix;
+                let rationale = "";
+
+                const randPre = finalPrefixes[Math.floor(Math.random() * finalPrefixes.length)];
+                const randSuf = finalSuffixes[Math.floor(Math.random() * finalSuffixes.length)];
+                const randAdj = finalAdjectives[Math.floor(Math.random() * finalAdjectives.length)];
+
+                if (strat === 0) { // Suffix
+                    name = seedCap + randSuf;
+                    rationale = `Modern blend of '${seedCap}' + '${randSuf}' for a trendy feel.`;
+                }
+                else if (strat === 1) { // Prefix
+                    name = randPre + seedCap;
+                    rationale = `Authority prefix '${randPre}' adds weight to '${seedCap}'.`;
+                }
+                else if (strat === 2) { // Compound
+                    name = randAdj + seedCap;
+                    rationale = `Combining descriptive '${randAdj}' with your core term.`;
+                }
+                else if (strat === 3) { // Blending (Short)
+                    const shortSeed = seedCap.length > 4 ? seedCap.slice(0, 3) : seedCap;
+                    name = shortSeed + randSuf;
+                    rationale = `Short, punchy derivative of '${seedCap}'.`;
+                }
+                else { // Vowel Drop / Creative
+                    const noVowels = seedCap.replace(/[aeiou]/gi, '');
+                    name = (noVowels.length > 2 ? noVowels : seedCap) + 'z';
+                    rationale = `Stylized abstraction of '${seedCap}' for a distinct identity.`;
                 }
 
                 generatedMockNames.push({
-                    name: name,
-                    tagline: `The Future of ${industry}`,
-                    rationale: `Combines "${seed}" with a modern affix to imply growth in ${keywords}.`,
+                    name,
+                    tagline: `Redefining ${industry || 'Excellence'}`,
+                    rationale,
                     domainAvailable: Math.random() > 0.4,
                     trademarkSafe: Math.random() > 0.3
                 });
-            }
+            });
 
             setResults(generatedMockNames);
         } finally {
