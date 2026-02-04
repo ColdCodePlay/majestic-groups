@@ -142,12 +142,19 @@ const LaunchpadWizard: React.FC = () => {
                         ))}
                     </div>
 
+
                     <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
                         <Link
                             to="/pricing"
                             className="w-full sm:w-auto px-10 py-5 bg-indigo-600 text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-indigo-600/30 hover:scale-105 transition-all text-center"
                         >
                             Get Started with Bundle
+                        </Link>
+                        <Link
+                            to="/name-generator"
+                            className="w-full sm:w-auto px-10 py-5 bg-pink-50 text-pink-600 border border-pink-100 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-pink-100 transition-all text-center flex items-center justify-center gap-2"
+                        >
+                            <Sparkles className="w-4 h-4" /> Name My Business
                         </Link>
                         <button
                             onClick={() => { setIsFinished(false); setCurrentStep(0); setSelections({}); }}
@@ -198,14 +205,14 @@ const LaunchpadWizard: React.FC = () => {
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => handleSelect(STEPS[currentStep].id, option.id)}
                                 className={`text-left p-8 rounded-[2.5rem] border-2 transition-all relative group overflow-hidden ${selections[STEPS[currentStep].id] === option.id
-                                        ? 'border-indigo-600 bg-indigo-50/30'
-                                        : 'border-slate-100 bg-white hover:border-slate-200'
+                                    ? 'border-indigo-600 bg-indigo-50/30'
+                                    : 'border-slate-100 bg-white hover:border-slate-200'
                                     }`}
                             >
                                 <div className="flex items-start gap-6 relative z-10">
                                     <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-all ${selections[STEPS[currentStep].id] === option.id
-                                            ? 'bg-indigo-600 text-white'
-                                            : 'bg-slate-50 text-slate-400 group-hover:bg-slate-100 group-hover:text-slate-600'
+                                        ? 'bg-indigo-600 text-white'
+                                        : 'bg-slate-50 text-slate-400 group-hover:bg-slate-100 group-hover:text-slate-600'
                                         }`}>
                                         {option.icon}
                                     </div>
