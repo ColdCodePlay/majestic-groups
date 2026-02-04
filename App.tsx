@@ -25,6 +25,7 @@ import VaultPage from './pages/Vault';
 import NameGeneratorPage from './pages/NameGeneratorPage';
 import EquityCalculatorPage from './pages/EquityCalculatorPage';
 import EntitySelectorPage from './pages/EntitySelectorPage';
+import InvoiceGeneratorPage from './pages/InvoiceGeneratorPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminServices from './pages/admin/AdminServices';
 import AdminPricing from './pages/admin/AdminPricing';
@@ -56,6 +57,7 @@ const Navbar = () => {
         { name: 'Name Generator', path: '/name-generator' },
         { name: 'Equity Calculator', path: '/equity-calculator' },
         { name: 'Entity Selector', path: '/entity-selector' },
+        { name: 'Invoice Generator', path: '/invoice-generator' },
         { name: 'Launchpad', path: '/launchpad' },
       ]
     },
@@ -318,6 +320,7 @@ const AppContent = () => {
           <Route path="/vault" element={<VaultPage />} />
           <Route path="/name-generator" element={<NameGeneratorPage />} />
           <Route path="/equity-calculator" element={<EquityCalculatorPage />} />
+          <Route path="/invoice-generator" element={<InvoiceGeneratorPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/launchpad" element={<Launchpad />} />

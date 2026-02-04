@@ -144,18 +144,18 @@ const EntitySelector = () => {
     const currentQuestion = QUESTIONS[step];
 
     return (
-        <div className="w-full max-w-2xl mx-auto">
+        <div className="w-full max-w-xl mx-auto">
             {/* Progress Bar */}
             {!result && (
-                <div className="mb-8">
-                    <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                <div className="mb-6">
+                    <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
                         <motion.div
                             className="h-full bg-violet-600 rounded-full"
                             initial={{ width: 0 }}
                             animate={{ width: `${((step + 1) / QUESTIONS.length) * 100}%` }}
                         />
                     </div>
-                    <p className="text-right text-xs font-bold text-slate-400 mt-2 uppercas tracking-widest">
+                    <p className="text-right text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">
                         Step {step + 1} of {QUESTIONS.length}
                     </p>
                 </div>
@@ -169,26 +169,26 @@ const EntitySelector = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100"
+                        className="bg-white p-6 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100"
                     >
-                        <h2 className="text-3xl font-black text-slate-900 mb-2">{currentQuestion.text}</h2>
-                        <p className="text-slate-500 text-lg mb-8">{currentQuestion.description}</p>
+                        <h2 className="text-2xl font-black text-slate-900 mb-2">{currentQuestion.text}</h2>
+                        <p className="text-slate-500 text-base mb-6">{currentQuestion.description}</p>
 
-                        <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-1 gap-3">
                             {currentQuestion.options.map((option) => (
                                 <button
                                     key={option.id}
                                     onClick={() => handleOptionSelect(option.value)}
-                                    className="group relative flex items-center p-6 border-2 border-slate-100 rounded-2xl hover:border-violet-500 hover:bg-violet-50 transition-all text-left"
+                                    className="group relative flex items-center p-4 border-2 border-slate-100 rounded-xl hover:border-violet-500 hover:bg-violet-50 transition-all text-left"
                                 >
-                                    <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-100 mr-5 group-hover:scale-110 transition-transform">
+                                    <div className="bg-white p-2 rounded-lg shadow-sm border border-slate-100 mr-4 group-hover:scale-110 transition-transform">
                                         {option.icon}
                                     </div>
                                     <div>
-                                        <h3 className="text-lg font-bold text-slate-900 group-hover:text-violet-700">{option.label}</h3>
+                                        <h3 className="text-base font-bold text-slate-900 group-hover:text-violet-700">{option.label}</h3>
                                     </div>
-                                    <div className="absolute right-6 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
-                                        <ArrowRight className="w-5 h-5 text-violet-600" />
+                                    <div className="absolute right-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+                                        <ArrowRight className="w-4 h-4 text-violet-600" />
                                     </div>
                                 </button>
                             ))}
@@ -198,30 +198,30 @@ const EntitySelector = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="bg-gradient-to-br from-indigo-900 to-violet-900 p-1 rounded-[2.5rem] shadow-2xl shadow-indigo-500/30"
+                        className="bg-gradient-to-br from-indigo-900 to-violet-900 p-1 rounded-3xl shadow-2xl shadow-indigo-500/30"
                     >
-                        <div className="bg-white rounded-[2.4rem] p-8 md:p-12 text-center">
-                            <div className="inline-flex items-center justify-center p-4 bg-green-100 rounded-full mb-6">
-                                <CheckCircle2 className="w-12 h-12 text-green-600" />
+                        <div className="bg-white rounded-[1.4rem] p-6 md:p-8 text-center">
+                            <div className="inline-flex items-center justify-center p-3 bg-green-100 rounded-full mb-4">
+                                <CheckCircle2 className="w-8 h-8 text-green-600" />
                             </div>
 
-                            <h2 className="text-lg font-bold text-slate-400 uppercase tracking-widest mb-2">Maximum Match Found</h2>
-                            <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
+                            <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Maximum Match Found</h2>
+                            <h1 className="text-2xl md:text-3xl font-black text-slate-900 mb-4 leading-tight">
                                 {result}
                             </h1>
 
-                            <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto leading-relaxed">
+                            <p className="text-base text-slate-600 mb-6 max-w-lg mx-auto leading-relaxed">
                                 {getResultDetails(result).desc}
                             </p>
 
-                            <div className="grid md:grid-cols-2 gap-6 mb-10 text-left bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <div className="grid md:grid-cols-2 gap-4 mb-8 text-left bg-slate-50 p-4 rounded-xl border border-slate-100">
                                 <div>
-                                    <h4 className="font-bold text-green-600 mb-3 flex items-center gap-2">
+                                    <h4 className="font-bold text-green-600 mb-2 flex items-center gap-2 text-sm">
                                         <TrendingUp className="w-4 h-4" /> Pros
                                     </h4>
-                                    <ul className="space-y-2">
+                                    <ul className="space-y-1">
                                         {getResultDetails(result).pros.map((p, i) => (
-                                            <li key={i} className="text-sm font-medium text-slate-600 flex items-start gap-2">
+                                            <li key={i} className="text-xs font-medium text-slate-600 flex items-start gap-2">
                                                 <span className="w-1.5 h-1.5 bg-green-400 rounded-full mt-1.5 flex-shrink-0" />
                                                 {p}
                                             </li>
@@ -229,12 +229,12 @@ const EntitySelector = () => {
                                     </ul>
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-rose-500 mb-3 flex items-center gap-2">
+                                    <h4 className="font-bold text-rose-500 mb-2 flex items-center gap-2 text-sm">
                                         <AlertTriangle className="w-4 h-4" /> Cons
                                     </h4>
-                                    <ul className="space-y-2">
+                                    <ul className="space-y-1">
                                         {getResultDetails(result).cons.map((c, i) => (
-                                            <li key={i} className="text-sm font-medium text-slate-600 flex items-start gap-2">
+                                            <li key={i} className="text-xs font-medium text-slate-600 flex items-start gap-2">
                                                 <span className="w-1.5 h-1.5 bg-rose-400 rounded-full mt-1.5 flex-shrink-0" />
                                                 {c}
                                             </li>
@@ -243,18 +243,18 @@ const EntitySelector = () => {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                            <div className="flex flex-col md:flex-row items-center justify-center gap-3">
                                 <Link
                                     to={getResultDetails(result).link}
-                                    className="w-full md:w-auto px-8 py-4 bg-violet-600 text-white rounded-xl font-black text-lg hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/30 flex items-center justify-center gap-2"
+                                    className="w-full md:w-auto px-6 py-3 bg-violet-600 text-white rounded-lg font-bold text-base hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/30 flex items-center justify-center gap-2"
                                 >
-                                    Register Now <ArrowRight className="w-5 h-5" />
+                                    Register Now <ArrowRight className="w-4 h-4" />
                                 </Link>
                                 <button
                                     onClick={resetQuiz}
-                                    className="w-full md:w-auto px-8 py-4 bg-white text-slate-600 border-2 border-slate-100 rounded-xl font-bold text-lg hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2"
+                                    className="w-full md:w-auto px-6 py-3 bg-white text-slate-600 border-2 border-slate-100 rounded-lg font-bold text-base hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2"
                                 >
-                                    <RotateCcw className="w-5 h-5" /> Retake Quiz
+                                    <RotateCcw className="w-4 h-4" /> Retake
                                 </button>
                             </div>
                         </div>
