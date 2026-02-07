@@ -293,19 +293,25 @@ const Footer = () => {
   );
 };
 
+import LoginPage from './pages/LoginPage';
+import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
+
 const App: React.FC = () => {
   return (
-    <DataProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </DataProvider>
+    <Router>
+      <AuthProvider>
+        <DataProvider>
+          <AppContent />
+        </DataProvider>
+      </AuthProvider>
+    </Router>
   );
 };
 
 const AppContent = () => {
   const location = useLocation();
-  const isAdminPath = location.pathname.startsWith('/admin');
+  const isAdminPath = location.pathname.startsWith('/admin') || location.pathname === '/login';
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -324,11 +330,17 @@ const AppContent = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/launchpad" element={<Launchpad />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/services" element={<AdminServices />} />
-          <Route path="/admin/pricing" element={<AdminPricing />} />
-          <Route path="/admin/crm" element={<AdminCRM />} />
-          <Route path="/admin/settings" element={<AdminSettings />} />
+
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* Protected Admin Routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/services" element={<AdminServices />} />
+            <Route path="/admin/pricing" element={<AdminPricing />} />
+            <Route path="/admin/crm" element={<AdminCRM />} />
+            <Route path="/admin/settings" element={<AdminSettings />} />
+          </Route>
         </Routes>
       </main>
       {!isAdminPath && <Footer />}
