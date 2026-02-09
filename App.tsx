@@ -77,7 +77,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 group">
               <img
-                src="/logo_main.png"
+                src="/logo_main.png?v=2"
                 alt="Majestic Groups"
                 className="h-16 sm:h-20 w-auto object-contain transition-all duration-500 group-hover:drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]"
               />
