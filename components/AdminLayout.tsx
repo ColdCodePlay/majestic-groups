@@ -50,7 +50,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <div className="p-8 border-b border-slate-800 flex items-center justify-between">
                     <Link to="/" className="flex flex-col items-center gap-4 group mb-4">
                         <img
-                            src="/logo_main.png"
+                            src="/logo_main.png?v=2"
                             alt="Majestic Admin"
                             className="h-20 w-auto object-contain bg-white rounded-xl p-2 shadow-lg"
                         />
