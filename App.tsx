@@ -73,7 +73,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${shouldShowDarkNav ? 'bg-white/70 backdrop-blur-2xl border-b border-white/20 shadow-lg shadow-indigo-100/10 py-2' : 'bg-transparent py-4'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
+        <div className="relative flex justify-center md:justify-between items-center h-16 md:h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 group">
               <img
@@ -90,8 +90,8 @@ const Navbar = () => {
                 {link.children ? (
                   <button
                     className={`px-4 py-2 text-sm font-bold rounded-lg transition-all flex items-center gap-1 group
-                      ${shouldShowDarkNav ? 'text-slate-600 hover:text-indigo-600 hover:bg-white/50' : 'text-white/80 hover:text-white hover:bg-white/10'}
-                    `}
+                        ${shouldShowDarkNav ? 'text-slate-600 hover:text-indigo-600 hover:bg-white/50' : 'text-white/80 hover:text-white hover:bg-white/10'}
+                      `}
                   >
                     {link.name} <ChevronDown className="w-4 h-4" />
                     {/* Dropdown Menu */}
@@ -129,7 +129,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="md:hidden flex items-center">
+          <div className="absolute right-0 md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-xl transition-all ${shouldShowDarkNav ? 'bg-slate-100 text-slate-800' : 'bg-white/10 text-white'
