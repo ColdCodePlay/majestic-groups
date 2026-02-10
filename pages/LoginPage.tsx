@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { supabase } from '../src/supabaseClient';
 import { Lock, User, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -18,11 +19,15 @@ const LoginPage = () => {
         setIsSubmitting(true);
 
         try {
-            const success = await login(username, password);
-            if (success) {
-                navigate('/admin');
+            const { error } = await supabase.auth.signInWithPassword({
+                email: username,
+                password: password,
+            });
+
+            if (error) {
+                setError(error.message);
             } else {
-                setError('Invalid credentials. Please try again.');
+                navigate('/admin');
             }
         } catch (err) {
             setError('An error occurred. Please try again later.');

@@ -81,24 +81,7 @@ const AdminDashboard: React.FC = () => {
                     </div>
                 </div>
 
-                {/* System Warnings / Info */}
-                <div className="bg-slate-900 rounded-[3rem] p-10 text-white relative overflow-hidden flex flex-col justify-between">
-                    <div className="absolute bottom-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-[100px] translate-y-1/2 translate-x-1/2"></div>
 
-                    <div>
-                        <div className="flex items-center gap-3 mb-6 bg-white/10 w-fit px-4 py-2 rounded-full border border-white/10">
-                            <AlertCircle size={16} className="text-indigo-400" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400">Persistence Notice</span>
-                        </div>
-                        <h3 className="text-2xl font-black mb-4 tracking-tight leading-tight">Changes are stored in <br />Local Storage.</h3>
-                        <p className="text-slate-400 text-sm leading-relaxed font-medium">To reflect changes on other devices, a cloud database integration (like Supabase or Firebase) is required. Current changes will persist on this browser only.</p>
-                    </div>
-
-                    <div className="mt-12 bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm italic">
-                        <span className="text-indigo-400 font-black text-xs block mb-1 uppercase tracking-widest">Development Tip</span>
-                        <p className="text-[11px] text-slate-300">You can clear LocalStorage or use the 'Reset' button in Settings to revert to the default `constants.tsx` values.</p>
-                    </div>
-                </div>
             </div>
         </AdminLayout>
     );

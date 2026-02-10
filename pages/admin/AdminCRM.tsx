@@ -1,6 +1,7 @@
 
 import React, { useState, useMemo } from 'react';
 import AdminLayout from '../../components/AdminLayout';
+import { useAuth } from '../../context/AuthContext';
 import { useData } from '../../context/DataContext';
 import {
     Users,
@@ -32,12 +33,28 @@ const STATUS_CONFIG: Record<LeadStatus, { color: string, icon: any }> = {
 };
 
 const AdminCRM: React.FC = () => {
-    const { leads, updateLeadStatus, deleteLead } = useData();
+    const { leads, updateLeadStatus, deleteLead, addLeadComment, importLeadsFromCSV, profiles, assignLead } = useData();
+    const { user } = useAuth(); // Need to know if I am admin or agent to show certain things
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState<LeadStatus | 'All'>('All');
     const [dateFilter, setDateFilter] = useState<'all' | '24h' | '7d' | '30d'>('all');
     const [serviceFilter, setServiceFilter] = useState<string>('All');
-    const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+
+    // Comments Modal State
+    const [isCommentsModalOpen, setIsCommentsModalOpen] = useState(false);
+    const [selectedLeadForComments, setSelectedLeadForComments] = useState<Lead | null>(null);
+    const [newComment, setNewComment] = useState('');
+
+    // Derived state for current user role (naive check for now, ideally auth context provides role)
+    // We can check if user email is in profiles with 'admin' role?
+    // For now, let's assume we can derive it or just fetch it.
+    // Actually, DataContext or AuthContext should provide the current profile.
+    // But since we didn't add that to AuthContext yet, we can check `profiles` list for `user.email`.
+    const currentProfile = useMemo(() =>
+        profiles.find(p => p.email === user?.email),
+        [profiles, user]);
+
+    const isAdmin = currentProfile?.role === 'admin';
 
     const uniqueServices = useMemo(() => {
         const services = new Set(leads.map(l => l.plan));
@@ -71,6 +88,34 @@ const AdminCRM: React.FC = () => {
         });
     }, [leads, searchTerm, statusFilter, serviceFilter, dateFilter]);
 
+    const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            importLeadsFromCSV(file);
+        }
+    };
+
+    const openComments = (lead: Lead) => {
+        setSelectedLeadForComments(lead);
+        setIsCommentsModalOpen(true);
+    };
+
+    const handleAddComment = async () => {
+        if (!selectedLeadForComments || !newComment.trim()) return;
+
+        await addLeadComment(selectedLeadForComments.id, newComment, currentProfile?.full_name || 'Agent');
+        setNewComment('');
+        // Update local selected lead to show new comment immediately (though context update will trigger re-render too)
+        // Ideally we fetch fresh data or context updates selectedLeadForComments if it was passed by ID.
+        // Since we pass object, we might see stale data in modal unless we re-find it from leads.
+    };
+
+    // Get fresh lead data for modal to ensure comments are up to date
+    const activeLead = useMemo(() =>
+        leads.find(l => l.id === selectedLeadForComments?.id) || selectedLeadForComments
+        , [leads, selectedLeadForComments]);
+
+
     const downloadCSV = () => {
         // Filter for last 7 days as requested
         const now = new Date();
@@ -85,7 +130,7 @@ const AdminCRM: React.FC = () => {
             return;
         }
 
-        const headers = ['ID', 'Date', 'Name', 'Email', 'Phone', 'Plan', 'Price', 'Location', 'Status'];
+        const headers = ['ID', 'Date', 'Name', 'Email', 'Phone', 'Plan', 'Price', 'Location', 'Source', 'Assigned To', 'Status', 'Comments Count'];
         const csvContent = [
             headers.join(','),
             ...weekAgoLeads.map(l => [
@@ -97,7 +142,10 @@ const AdminCRM: React.FC = () => {
                 `"${l.plan}"`,
                 l.price,
                 `"${l.location}"`,
-                l.status
+                `"${l.source || ''}"`,
+                `"${l.assignedToName || 'Unassigned'}"`,
+                l.status,
+                l.comments?.length || 0
             ].join(','))
         ].join('\n');
 
@@ -121,6 +169,24 @@ const AdminCRM: React.FC = () => {
         return { total, converted, newLeads, rate };
     }, [leads]);
 
+    const SourceBadge = ({ source }: { source?: string }) => {
+        if (!source) return null;
+        const colors: Record<string, string> = {
+            'Website': 'bg-blue-100 text-blue-700',
+            'Justdial': 'bg-orange-100 text-orange-700',
+            'Direct Call': 'bg-green-100 text-green-700',
+            'Referral': 'bg-purple-100 text-purple-700',
+            'CSV Import': 'bg-gray-100 text-gray-700'
+        };
+        const defaultColor = 'bg-slate-100 text-slate-700';
+
+        return (
+            <span className={`text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide ${colors[source] || defaultColor}`}>
+                {source}
+            </span>
+        );
+    };
+
     return (
         <AdminLayout>
             <div className="space-y-8">
@@ -128,8 +194,17 @@ const AdminCRM: React.FC = () => {
                     <div>
                         <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Lead Console</h1>
                         <p className="text-slate-500 mt-2 font-medium text-sm md:text-base">Manage and convert your business prospects.</p>
+                        {/* Debug Info for Role */}
+                        <span className="text-xs text-slate-400">Logged in as: {user?.email} ({currentProfile?.role || 'Loading...'})</span>
                     </div>
+                    {/* ... Header Buttons ... */}
                     <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                        {isAdmin && (
+                            <label className="bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-2xl font-black text-sm flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95 cursor-pointer">
+                                <Package className="w-4 h-4" /> Import CSV
+                                <input type="file" accept=".csv" onChange={handleFileUpload} className="hidden" />
+                            </label>
+                        )}
                         <button
                             onClick={downloadCSV}
                             className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-2xl font-black text-sm flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95"
@@ -248,6 +323,8 @@ const AdminCRM: React.FC = () => {
                                     <th className="px-8 py-5">Lead</th>
                                     <th className="px-8 py-5">Contact</th>
                                     <th className="px-8 py-5">Inquiry Details</th>
+                                    <th className="px-8 py-5">Source</th>
+                                    <th className="px-8 py-5">Assigned To</th>
                                     <th className="px-8 py-5">Status</th>
                                     <th className="px-8 py-5 text-right">Actions</th>
                                 </tr>
@@ -265,6 +342,8 @@ const AdminCRM: React.FC = () => {
                                                     <div>
                                                         <span className="text-white font-black block leading-tight">{lead.name}</span>
                                                         <span className="text-slate-500 text-[10px] font-bold mt-1 uppercase tracking-widest">{lead.id}</span>
+                                                        {/* Comments moved here or keep button? User said 'comment option not showing' */}
+                                                        {/* I will keep the button in Inquiry Details but also maybe show latest? */}
                                                     </div>
                                                 </div>
                                             </td>
@@ -284,7 +363,32 @@ const AdminCRM: React.FC = () => {
                                                     <div className="flex items-center gap-2 text-slate-500 text-[10px] uppercase font-black">
                                                         <MapPin className="w-3 h-3" /> {lead.location}
                                                     </div>
+                                                    <button onClick={() => openComments(lead)} className="text-xs text-slate-500 hover:text-white mt-1 flex items-center gap-1 underline decoration-slate-700 hover:decoration-white transition-all">
+                                                        {lead.comments && lead.comments.length > 0 ? `${lead.comments.length} Comments` : 'Add Note'}
+                                                    </button>
                                                 </div>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <SourceBadge source={lead.source} />
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                {/* Agent Assignment Dropdown (Admin only) or Display Name (Agent) */}
+                                                {isAdmin ? (
+                                                    <select
+                                                        value={lead.assignedTo || ''}
+                                                        onChange={(e) => assignLead(lead.id, e.target.value)}
+                                                        className="bg-slate-800 text-white text-xs rounded-lg px-2 py-1 border border-slate-700 focus:outline-none"
+                                                    >
+                                                        <option value="">Unassigned</option>
+                                                        {profiles.map(p => (
+                                                            <option key={p.id} value={p.id}>{p.full_name || p.email} ({p.role})</option>
+                                                        ))}
+                                                    </select>
+                                                ) : (
+                                                    <span className="text-slate-400 text-sm">
+                                                        {lead.assignedToName || 'Unassigned'}
+                                                    </span>
+                                                )}
                                             </td>
                                             <td className="px-8 py-6">
                                                 <div className="relative group/status">
@@ -303,12 +407,15 @@ const AdminCRM: React.FC = () => {
                                                 </div>
                                             </td>
                                             <td className="px-8 py-6 text-right">
-                                                <button
-                                                    onClick={() => deleteLead(lead.id)}
-                                                    className="p-2 text-slate-600 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
-                                                >
-                                                    <Trash2 className="w-5 h-5" />
-                                                </button>
+                                                {/* Delete only for Admins */}
+                                                {isAdmin && (
+                                                    <button
+                                                        onClick={() => deleteLead(lead.id)}
+                                                        className="p-2 text-slate-600 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                                                    >
+                                                        <Trash2 className="w-5 h-5" />
+                                                    </button>
+                                                )}
                                             </td>
                                         </tr>
                                     )
@@ -324,6 +431,59 @@ const AdminCRM: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Comments Modal */}
+            {isCommentsModalOpen && activeLead && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm" onClick={() => setIsCommentsModalOpen(false)}></div>
+                    <div className="bg-white rounded-[2rem] p-8 w-full max-w-lg relative z-10 shadow-2xl">
+                        <button
+                            onClick={() => setIsCommentsModalOpen(false)}
+                            className="absolute top-6 right-6 p-2 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors"
+                        >
+                            <XCircle className="w-6 h-6 text-slate-500" />
+                        </button>
+
+                        <h2 className="text-2xl font-black text-slate-900 mb-2">Lead Notes</h2>
+                        <p className="text-slate-500 text-sm font-medium mb-6">For {activeLead.name}</p>
+
+                        <div className="max-h-60 overflow-y-auto mb-6 space-y-4 pr-2">
+                            {activeLead.comments && activeLead.comments.length > 0 ? (
+                                activeLead.comments.map((comment, idx) => (
+                                    <div key={idx} className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                        <p className="text-slate-800 text-sm font-medium mb-2">{comment.text}</p>
+                                        <div className="flex justify-between items-center text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                            <span>{comment.author}</span>
+                                            <span>{new Date(comment.timestamp).toLocaleString()}</span>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="text-center py-8 text-slate-400 text-sm font-medium italic">
+                                    No comments yet. Start the conversation!
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="flex gap-3">
+                            <input
+                                type="text"
+                                value={newComment}
+                                onChange={(e) => setNewComment(e.target.value)}
+                                placeholder="Add a note..."
+                                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 font-medium text-slate-700"
+                                onKeyDown={(e) => e.key === 'Enter' && handleAddComment()}
+                            />
+                            <button
+                                onClick={handleAddComment}
+                                className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all"
+                            >
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </AdminLayout>
     );
 };

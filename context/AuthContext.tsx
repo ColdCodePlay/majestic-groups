@@ -1,10 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '../src/supabaseClient';
+import { User, Session } from '@supabase/supabase-js';
 
 interface AuthContextType {
     isAuthenticated: boolean;
-    login: (username: string, password: string) => Promise<boolean>;
+    login: () => Promise<void>;
     logout: () => void;
     isLoading: boolean;
+    user: User | null;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -12,39 +15,47 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
-        // Check for existing session
-        const auth = localStorage.getItem('majestic_auth');
-        if (auth === 'true') {
-            setIsAuthenticated(true);
-        }
-        setIsLoading(false);
+        // Check active session
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) {
+                setUser(session.user);
+                setIsAuthenticated(true);
+            }
+            setIsLoading(false);
+        });
+
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session) {
+                setUser(session.user);
+                setIsAuthenticated(true);
+            } else {
+                setUser(null);
+                setIsAuthenticated(false);
+            }
+            setIsLoading(false);
+        });
+
+        return () => subscription.unsubscribe();
     }, []);
 
-    const login = async (username: string, password: string): Promise<boolean> => {
-        // Mock authentication
-        // In a real app, this would hit an API endpoint
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                if (username === 'admin' && password === 'password123') {
-                    setIsAuthenticated(true);
-                    localStorage.setItem('majestic_auth', 'true');
-                    resolve(true);
-                } else {
-                    resolve(false);
-                }
-            }, 800); // Simulate network delay
-        });
+    const login = async () => {
+        // Implement login logic here, e.g., redirect to Supabase login or open modal
+        // For now, we'll just log to console as the UI needs to call signInWithPassword
+        console.log("Login triggered");
     };
 
-    const logout = () => {
+    const logout = async () => {
+        await supabase.auth.signOut();
         setIsAuthenticated(false);
-        localStorage.removeItem('majestic_auth');
+        setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, isLoading }}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, isLoading, user }}>
             {children}
         </AuthContext.Provider>
     );

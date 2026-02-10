@@ -30,6 +30,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminServices from './pages/admin/AdminServices';
 import AdminPricing from './pages/admin/AdminPricing';
 import AdminCRM from './pages/admin/AdminCRM';
+import AdminAgents from './pages/admin/AdminAgents';
 import AdminSettings from './pages/admin/AdminSettings';
 import { DataProvider } from './context/DataContext';
 import AIAssistant from './components/AIAssistant';
@@ -295,6 +296,7 @@ const Footer = () => {
 
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import DataSeeder from './components/DataSeeder';
 import { AuthProvider } from './context/AuthContext';
 
 const App: React.FC = () => {
@@ -332,6 +334,7 @@ const AppContent = () => {
           <Route path="/launchpad" element={<Launchpad />} />
 
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/seed" element={<DataSeeder />} />
 
           {/* Protected Admin Routes */}
           <Route element={<ProtectedRoute />}>
@@ -339,6 +342,7 @@ const AppContent = () => {
             <Route path="/admin/services" element={<AdminServices />} />
             <Route path="/admin/pricing" element={<AdminPricing />} />
             <Route path="/admin/crm" element={<AdminCRM />} />
+            <Route path="/admin/agents" element={<AdminAgents />} />
             <Route path="/admin/settings" element={<AdminSettings />} />
           </Route>
         </Routes>

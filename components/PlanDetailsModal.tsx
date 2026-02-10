@@ -86,7 +86,7 @@ const PlanDetailsModal: React.FC<PlanDetailsModalProps> = ({
                 items: items
             };
 
-            const newLead = addLead(rawLead);
+            const newLead = await addLead(rawLead);
             setLeadId(newLead.id);
 
             // Simulate API delay for UX

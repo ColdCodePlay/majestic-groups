@@ -1,34 +1,15 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import AdminLayout from '../../components/AdminLayout';
-import { useData } from '../../context/DataContext';
 import {
-    Settings,
-    RotateCcw,
-    ShieldAlert,
     Database,
     Globe,
     Mail,
     MessageSquare,
-    Save,
-    Check
+    Save
 } from 'lucide-react';
 
 const AdminSettings: React.FC = () => {
-    const { resetToDefaults } = useData();
-    const [successMessage, setSuccessMessage] = useState('');
-
-    const handleReset = () => {
-        if (window.confirm("CRITICAL ACTION: This will erase all your local modifications to Services, Pricing, and Leads. Are you absolutely sure?")) {
-            resetToDefaults();
-            setSuccessMessage('System reset to defaults successfully.');
-            setTimeout(() => {
-                setSuccessMessage('');
-                window.location.reload();
-            }, 2000);
-        }
-    };
-
     return (
         <AdminLayout>
             <div className="space-y-8">
@@ -37,41 +18,31 @@ const AdminSettings: React.FC = () => {
                     <p className="text-slate-500 mt-2 font-medium">Configure your Majestic Admin Panel and data persistence.</p>
                 </div>
 
-                {successMessage && (
-                    <div className="flex items-center gap-3 bg-emerald-50 text-emerald-600 p-6 rounded-[2rem] border border-emerald-100 animate-in fade-in slide-in-from-top-4">
-                        <Check className="w-6 h-6" />
-                        <span className="font-bold">{successMessage}</span>
-                    </div>
-                )}
-
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Data Management */}
+                    {/* Database Info */}
                     <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm">
                         <div className="flex items-center gap-4 mb-8">
                             <div className="p-4 bg-indigo-50 text-indigo-600 rounded-2xl">
                                 <Database size={24} />
                             </div>
                             <div>
-                                <h3 className="text-xl font-black text-slate-900">Data Management</h3>
-                                <p className="text-slate-500 text-sm font-medium">Manage local storage and defaults.</p>
+                                <h3 className="text-xl font-black text-slate-900">Database Connection</h3>
+                                <p className="text-slate-500 text-sm font-medium">Synced with Supabase.</p>
                             </div>
                         </div>
 
                         <div className="space-y-6">
-                            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100">
                                 <div className="flex items-start gap-4">
-                                    <ShieldAlert className="text-amber-500 w-6 h-6 mt-1 flex-shrink-0" />
+                                    <div className="p-2 bg-white rounded-lg shadow-sm">
+                                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                                    </div>
                                     <div>
-                                        <h4 className="font-bold text-slate-800 mb-1">Reset All Data</h4>
-                                        <p className="text-xs text-slate-500 mb-4 leading-relaxed">
-                                            Warning: This will clear all custom services, pricing plans, and captured leads from your browser's Local Storage and restore initial constants.
+                                        <h4 className="font-bold text-slate-800 mb-1">Live Connection Active</h4>
+                                        <p className="text-xs text-slate-500 leading-relaxed">
+                                            Services are being fetched directly from your Supabase cloud database.
+                                            Pricing plans and leads are currently stored locally.
                                         </p>
-                                        <button
-                                            onClick={handleReset}
-                                            className="flex items-center gap-2 bg-white text-red-600 border border-red-100 px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-red-50 transition-all active:scale-95 shadow-sm"
-                                        >
-                                            <RotateCcw size={14} /> Clear & Reset System
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +89,7 @@ const AdminSettings: React.FC = () => {
                     <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
                         <div>
                             <h3 className="text-2xl font-black mb-2 tracking-tight">System Status: Stable</h3>
-                            <p className="text-slate-400 text-sm font-medium">Version 2.1 • All changes are local and persistent.</p>
+                            <p className="text-slate-400 text-sm font-medium">Version 2.1 • Connected to Supabase.</p>
                         </div>
                         <button disabled className="bg-white/10 text-white border border-white/10 px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-white/20 transition-all opacity-50 cursor-not-allowed">
                             <Save size={18} /> Export Config

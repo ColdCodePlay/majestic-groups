@@ -1,38 +1,49 @@
 
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import {
     LayoutDashboard,
     Settings,
     Package,
-    IndianRupee,
-    Home,
-    LogOut,
-    ChevronRight,
-    ShieldCheck,
-    Zap,
     Users,
     Menu,
-    X
+    X,
+    ShieldCheck,
+    ShoppingBag,
+    Zap,
+    LogOut,
+    ChevronRight,
+    Home,
+    IndianRupee
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+    const { logout } = useAuth();
+    const navigate = useNavigate();
 
+    const handleLogout = async () => {
+        await logout();
+        navigate('/');
+    };
+
+    // Corrected menu items structure
     const menuItems = [
-        { name: 'Dashboard', path: '/admin', icon: <LayoutDashboard /> },
-        { name: 'Services', path: '/admin/services', icon: <Package /> },
-        { name: 'Pricing', path: '/admin/pricing', icon: <IndianRupee /> },
-        { name: 'CRM (Leads)', path: '/admin/crm', icon: <Users /> },
-        { name: 'Settings', path: '/admin/settings', icon: <Settings /> },
+        { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
+        { icon: Users, label: 'CRM / Leads', path: '/admin/crm' },
+        { icon: ShoppingBag, label: 'Services', path: '/admin/services' },
+        { icon: ShieldCheck, label: 'Agents', path: '/admin/agents' },
+        { icon: Settings, label: 'Settings', path: '/admin/settings' },
     ];
 
     return (
         <div className="flex min-h-screen bg-slate-50 font-sans relative">
             {/* Mobile Overlay */}
             <AnimatePresence>
+                {/* ... (keep existing overlay) ... */}
                 {isMobileMenuOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -69,6 +80,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <nav className="flex-grow p-4 space-y-1 mt-6 overflow-y-auto">
                     {menuItems.map((item) => {
                         const isActive = location.pathname === item.path;
+                        const Icon = item.icon; // Get icon component
                         return (
                             <Link
                                 key={item.path}
@@ -81,9 +93,9 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             >
                                 <div className="flex items-center gap-4 text-sm font-bold">
                                     <div className={`transition-colors ${isActive ? 'text-white' : 'text-slate-500 group-hover:text-indigo-400'}`}>
-                                        {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
+                                        <Icon size={20} />
                                     </div>
-                                    {item.name}
+                                    {item.label}
                                 </div>
                                 {isActive && <ChevronRight className="w-4 h-4" />}
                             </Link>
@@ -92,17 +104,14 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 </nav>
 
                 <div className="p-4 mt-auto">
-                    <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50 mb-6">
-                        <div className="flex items-center gap-3 mb-3">
-                            <ShieldCheck className="w-5 h-5 text-indigo-400" />
-                            <span className="text-xs font-black uppercase tracking-widest text-indigo-400">Master Mode</span>
-                        </div>
-                        <p className="text-[10px] text-slate-400 leading-relaxed font-medium">All changes are local and persistent across sessions.</p>
-                    </div>
 
-                    <Link to="/" className="flex items-center gap-4 px-4 py-4 text-slate-400 hover:text-white transition-colors text-sm font-bold border-t border-slate-800">
+
+                    <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center gap-4 px-4 py-4 text-slate-400 hover:text-white transition-colors text-sm font-bold border-t border-slate-800 text-left"
+                    >
                         <LogOut className="w-5 h-5" /> Logout Admin
-                    </Link>
+                    </button>
                 </div>
             </aside>
 
@@ -118,7 +127,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                         </button>
                         <div>
                             <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
-                                {menuItems.find(i => i.path === location.pathname)?.name || 'Admin'}
+                                {menuItems.find(i => i.path === location.pathname)?.label || 'Admin'}
                             </h1>
                             <p className="text-slate-500 font-medium text-xs md:text-sm mt-1 hidden sm:block">Manage your majestic operations from here.</p>
                         </div>

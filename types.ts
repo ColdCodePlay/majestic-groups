@@ -59,6 +59,18 @@ export interface Lead {
   price: string;
   status: LeadStatus;
   timestamp: string;
+  source?: string;
+  comments?: { text: string; timestamp: string; author: string }[];
   items?: string[];
+  assignedTo?: string; // UUID of the agent
+  assignedToName?: string; // Derived from profile
+}
+
+export interface Profile {
+  id: string;
+  email: string;
+  full_name?: string;
+  role: 'admin' | 'agent';
+  created_at?: string;
 }
 
