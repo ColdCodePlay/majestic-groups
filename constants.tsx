@@ -7,7 +7,10 @@ import {
   ShieldCheck,
   FileText,
   Rocket,
-  CheckCircle2
+  CheckCircle2,
+  HeartHandshake,
+  Award,
+  Lightbulb
 } from 'lucide-react';
 import { ServiceCategory, ServiceGroup, PricingPlan } from './types';
 
@@ -87,6 +90,34 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
       { name: "Virtual Office Services", startingPrice: "₹999", features: ["Premium Address", "Mail Handling", "Communication Support", "Cost Effective"] },
       { name: "Advisory & Consultation", startingPrice: "₹1,499", features: ["One-on-One CA/CS Call", "Funding Strategy", "Expansion Planning", "Compliance Roadmap"] }
     ]
+  },
+  {
+    category: ServiceCategory.NGO_REGISTRATION,
+    description: "Establish your non-profit entity with legal recognition.",
+    services: [
+      { name: "Sec-08 Co", startingPrice: "₹7,999", features: ["License under Sec 8", "DSC & DIN", "MoA & AoA", "Incorporation Certificate"] },
+      { name: "Trust Registration", startingPrice: "₹14,999", features: ["Drafting Trust Deed", "Registration with Sub-Registrar", "PAN Application", "Bank Account Support"] },
+      { name: "Society Registration", startingPrice: "₹12,999", features: ["Drafting Bye-laws", "Memorandum of Association", "Registration Certificate", "Election Rules"] }
+    ]
+  },
+  {
+    category: ServiceCategory.UDHYAM_REGISTRATION,
+    description: "Government benefits for small and medium enterprises.",
+    services: [
+      { name: "MSME Registration", startingPrice: "₹0", features: ["Udyam Registration Number", "Priority Sector Lending", "Subsidies Eligibility", "Paperless Process"] },
+      { name: "NSIC Registration", startingPrice: "₹4,999", features: ["Govt Procurement Preference", "Credit Facilitation", "Marketing Assistance", "Raw Material Support"] },
+      { name: "GEM Registration", startingPrice: "₹2,499", features: ["Govt E-Marketplace Seller", "Direct Access to Govt Departments", "Bid Participation", "Vendor Assessment"] }
+    ]
+  },
+  {
+    category: ServiceCategory.STARTUP_REGISTRATION,
+    description: "Launch and scale your startup with government incentives.",
+    services: [
+      { name: "Startup India (Make in India)", startingPrice: "₹2,999", features: ["DPIIT Recognition", "Tax Holidays", "Self-Certification", "Public Procurement Norms"] },
+      { name: "ESIC & EPF Registration", startingPrice: "₹3,499", features: ["Employee State Insurance", "Provident Fund Setup", "Social Security Compliance", "Portal Access"] },
+      { name: "FSSAI License (State & Central)", startingPrice: "₹2,999", features: ["Food Business License", "State/Central Categorization", "Hygiene Rating", "Compliance Audit"] },
+      { name: "FASSI Reg & State LIC", startingPrice: "₹3,999", features: ["Manufacturer/Supplier Lic", "State Authority Filing", "Food Safety Mgmt System", "Labeling Compliance"] }
+    ]
   }
 ];
 
@@ -137,6 +168,9 @@ export const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   [ServiceCategory.INTELLECTUAL_PROPERTY]: <ShieldCheck className="w-6 h-6" />,
   [ServiceCategory.LICENSES_GOVT]: <FileText className="w-6 h-6" />,
   [ServiceCategory.STARTUP_SUPPORT]: <Rocket className="w-6 h-6" />,
+  [ServiceCategory.NGO_REGISTRATION]: <HeartHandshake className="w-6 h-6" />,
+  [ServiceCategory.UDHYAM_REGISTRATION]: <Award className="w-6 h-6" />,
+  [ServiceCategory.STARTUP_REGISTRATION]: <Lightbulb className="w-6 h-6" />,
 };
 
 export const TESTIMONIALS = [

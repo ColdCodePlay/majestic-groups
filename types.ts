@@ -13,7 +13,10 @@ export enum ServiceCategory {
   LEGAL_COMPLIANCE = 'Legal & Compliance',
   INTELLECTUAL_PROPERTY = 'Intellectual Property',
   LICENSES_GOVT = 'Licenses & Registrations',
-  STARTUP_SUPPORT = 'Startup & SME Support'
+  STARTUP_SUPPORT = 'Startup & SME Support',
+  NGO_REGISTRATION = 'NGO Registration',
+  UDHYAM_REGISTRATION = 'Udhyam Registration',
+  STARTUP_REGISTRATION = 'Startup Registration'
 }
 
 export interface ComponentProps {
