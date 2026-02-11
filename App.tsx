@@ -60,12 +60,12 @@ const Navbar = () => {
       name: 'IPR',
       path: '#',
       children: [
-        { name: '1. Trademark', path: '#', disabled: true },
-        { name: 'A) TM Search', path: '/tm-search' },
-        { name: 'B) TM Status', path: '/tm-status' },
-        { name: 'C) TM Classes', path: '/tm-classes' },
-        { name: '2. Patent Search', path: 'https://iprsearch.ipindia.gov.in/PublicSearch/', external: true },
-        { name: '3. Copyright Search', path: 'https://copyright.gov.in/SearchRoc.aspx', external: true },
+        { name: 'Trademark', path: '#', disabled: true },
+        { name: 'TM Search', path: '/tm-search' },
+        { name: 'TM Status', path: '/tm-status' },
+        { name: 'TM Classes', path: '/tm-classes' },
+        { name: 'Patent Search', path: 'https://iprsearch.ipindia.gov.in/PublicSearch/', external: true },
+        { name: 'Copyright Search', path: 'https://copyright.gov.in/SearchRoc.aspx', external: true },
       ]
     },
     {
