@@ -75,7 +75,6 @@ const Navbar = () => {
       ]
     },
     { name: 'Pricing', path: '/pricing' },
-    { name: 'Vault', path: '/vault' },
     // { name: 'Contact', path: '/contact' }, // Moved Contact to CTA
   ];
 
