@@ -104,6 +104,14 @@ const DigitalSolutions: React.FC = () => {
         }
     ];
 
+    const scrollToForm = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const element = document.getElementById('contact-form');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className="bg-slate-50 min-h-screen">
             {/* Hero Section */}
@@ -160,12 +168,12 @@ const DigitalSolutions: React.FC = () => {
                                                 </li>
                                             ))}
                                         </ul>
-                                        <a
-                                            href="#contact-form"
+                                        <button
+                                            onClick={scrollToForm}
                                             className="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-sm hover:bg-indigo-600 transition-all flex items-center justify-center gap-2 group/btn active:scale-95"
                                         >
                                             Expert Consultation <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                                        </a>
+                                        </button>
                                     </motion.div>
                                 ))}
                             </div>
@@ -323,12 +331,12 @@ const DigitalSolutions: React.FC = () => {
                             Join 500+ businesses that scaled their operations using our custom tech stacks and marketing intelligence.
                         </p>
                         <div className="pt-4">
-                            <a
-                                href="#contact-form"
+                            <button
+                                onClick={scrollToForm}
                                 className="bg-white text-indigo-600 px-10 py-5 rounded-2xl font-black text-lg hover:bg-slate-50 transition-all shadow-2xl hover:scale-105 active:scale-95 inline-block"
                             >
                                 Book a Free Demo
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
