@@ -35,6 +35,7 @@ import AdminSettings from './pages/admin/AdminSettings';
 import DigitalSolutions from './pages/DigitalSolutions';
 import TMSearch from './pages/TMSearch';
 import TMStatus from './pages/TMStatus';
+import TMClasses from './pages/TMClasses';
 import { DataProvider } from './context/DataContext';
 import AIAssistant from './components/AIAssistant';
 
@@ -59,8 +60,12 @@ const Navbar = () => {
       name: 'IPR',
       path: '#',
       children: [
-        { name: 'TM Search', path: '/tm-search' },
-        { name: 'TM Status Check', path: '/tm-status' },
+        { name: '1. Trademark', path: '#', disabled: true },
+        { name: 'A) TM Search', path: '/tm-search' },
+        { name: 'B) TM Status', path: '/tm-status' },
+        { name: 'C) TM Classes', path: '/tm-classes' },
+        { name: '2. Patent Search', path: 'https://iprsearch.ipindia.gov.in/PublicSearch/', external: true },
+        { name: '3. Copyright Search', path: 'https://copyright.gov.in/SearchRoc.aspx', external: true },
       ]
     },
     {
@@ -109,13 +114,32 @@ const Navbar = () => {
                     {/* Dropdown Menu */}
                     <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left">
                       {link.children.map(child => (
-                        <Link
-                          key={child.path}
-                          to={child.path}
-                          className="block px-4 py-3 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 font-bold text-sm transition-colors"
-                        >
-                          {child.name}
-                        </Link>
+                        child.disabled ? (
+                          <div
+                            key={child.name}
+                            className="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-indigo-600 bg-indigo-50/50"
+                          >
+                            {child.name}
+                          </div>
+                        ) : child.external ? (
+                          <a
+                            key={child.path}
+                            href={child.path}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block px-4 py-3 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 font-bold text-sm transition-colors pl-6"
+                          >
+                            {child.name}
+                          </a>
+                        ) : (
+                          <Link
+                            key={child.path}
+                            to={child.path}
+                            className="block px-4 py-3 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 font-bold text-sm transition-colors pl-6"
+                          >
+                            {child.name}
+                          </Link>
+                        )
                       ))}
                     </div>
                   </button>
@@ -172,14 +196,34 @@ const Navbar = () => {
                       </div>
                       <div className="pl-4 border-l-2 border-slate-100 ml-4 space-y-1">
                         {link.children.map(child => (
-                          <Link
-                            key={child.path}
-                            to={child.path}
-                            onClick={() => setIsOpen(false)}
-                            className="block px-4 py-3 text-slate-600 font-bold hover:text-indigo-600"
-                          >
-                            {child.name}
-                          </Link>
+                          child.disabled ? (
+                            <div
+                              key={child.name}
+                              className="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-indigo-600"
+                            >
+                              {child.name}
+                            </div>
+                          ) : child.external ? (
+                            <a
+                              key={child.path}
+                              href={child.path}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => setIsOpen(false)}
+                              className="block px-4 py-3 text-slate-600 font-bold hover:text-indigo-600 pl-6"
+                            >
+                              {child.name}
+                            </a>
+                          ) : (
+                            <Link
+                              key={child.path}
+                              to={child.path}
+                              onClick={() => setIsOpen(false)}
+                              className="block px-4 py-3 text-slate-600 font-bold hover:text-indigo-600 pl-6"
+                            >
+                              {child.name}
+                            </Link>
+                          )
                         ))}
                       </div>
                     </div>
@@ -369,6 +413,7 @@ const AppContent = () => {
           <Route path="/digital-solutions" element={<DigitalSolutions />} />
           <Route path="/tm-search" element={<TMSearch />} />
           <Route path="/tm-status" element={<TMStatus />} />
+          <Route path="/tm-classes" element={<TMClasses />} />
         </Routes>
       </main>
       {!isAdminPath && <Footer />}
