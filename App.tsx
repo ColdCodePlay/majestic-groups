@@ -217,12 +217,17 @@ const Navbar = () => {
                 </Link>
               </motion.div>
 
-              <div className="grid grid-cols-2 gap-3 pt-6">
-                <a href="tel:+919899977311" className="flex items-center justify-center gap-2 py-4 bg-slate-50 rounded-2xl text-slate-600 font-bold text-sm border border-slate-100 italic">
-                  <Phone className="w-4 h-4 text-indigo-500" /> Call Sales
-                </a>
-                <a href="mailto:support@majesticgroups.com" className="flex items-center justify-center gap-2 py-4 bg-slate-50 rounded-2xl text-slate-600 font-bold text-sm border border-slate-100">
-                  <Mail className="w-4 h-4 text-indigo-500" /> Email Us
+              <div className="grid grid-cols-1 gap-2 pt-6">
+                <div className="grid grid-cols-2 gap-2">
+                  <a href="tel:01244152516" className="flex items-center justify-center gap-2 py-3 bg-slate-50 rounded-xl text-slate-600 font-bold text-xs border border-slate-100">
+                    <Phone className="w-3.5 h-3.5 text-indigo-500" /> Sales
+                  </a>
+                  <a href="tel:01244606264" className="flex items-center justify-center gap-2 py-3 bg-slate-50 rounded-xl text-slate-600 font-bold text-xs border border-slate-100">
+                    <Phone className="w-3.5 h-3.5 text-indigo-500" /> Support
+                  </a>
+                </div>
+                <a href="mailto:support@majesticgroups.org" className="flex items-center justify-center gap-2 py-3 bg-slate-50 rounded-xl text-slate-600 font-bold text-sm border border-slate-100">
+                  <Mail className="w-4 h-4 text-indigo-500" /> support@majesticgroups.org
                 </a>
               </div>
             </div>
@@ -283,11 +288,14 @@ const Footer = () => {
             <ul className="space-y-4 text-sm text-slate-400">
               <li className="flex items-start space-x-3">
                 <Phone className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-                <span>+91 9899977311</span>
+                <div className="flex flex-col">
+                  <span>Sales: 0124 - 4152516, 9899977311</span>
+                  <span>Support: 0124 - 4606264, 98999919071</span>
+                </div>
               </li>
               <li className="flex items-start space-x-3">
                 <Mail className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-                <span>support@majesticgroups.com</span>
+                <span>support@majesticgroups.org</span>
               </li>
               <li className="flex items-start space-x-3">
                 <div className="w-5 h-5 text-indigo-400 flex-shrink-0 flex justify-center">📍</div>

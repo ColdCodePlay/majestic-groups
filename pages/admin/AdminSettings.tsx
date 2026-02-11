@@ -66,14 +66,14 @@ const AdminSettings: React.FC = () => {
                                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Business Email</label>
                                 <div className="relative">
                                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                    <input disabled type="text" value="support@majesticgroups.com" className="w-full bg-slate-50 border border-slate-100 rounded-xl pl-12 pr-4 py-3 text-sm font-bold text-slate-600 focus:outline-none" />
+                                    <input disabled type="text" value="support@majesticgroups.org" className="w-full bg-slate-50 border border-slate-100 rounded-xl pl-12 pr-4 py-3 text-sm font-bold text-slate-600 focus:outline-none" />
                                 </div>
                             </div>
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Support WhatsApp</label>
                                 <div className="relative">
                                     <MessageSquare className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                    <input disabled type="text" value="+91 9899977311" className="w-full bg-slate-50 border border-slate-100 rounded-xl pl-12 pr-4 py-3 text-sm font-bold text-slate-600 focus:outline-none" />
+                                    <input disabled type="text" value="+91 98999919071" className="w-full bg-slate-50 border border-slate-100 rounded-xl pl-12 pr-4 py-3 text-sm font-bold text-slate-600 focus:outline-none" />
                                 </div>
                             </div>
                             <p className="text-[10px] text-indigo-500 font-bold italic text-right mt-4">

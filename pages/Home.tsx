@@ -199,7 +199,7 @@ const Home: React.FC = () => {
 
         {/* Mobile Quick Contact Bottom Bar */}
         <div className="md:hidden fixed bottom-6 left-6 right-6 z-[80] flex gap-3">
-          <a href="tel:+919899977311" className="flex-1 bg-white text-slate-900 h-14 rounded-2xl flex items-center justify-center gap-2 font-black shadow-2xl border border-slate-100">
+          <a href="tel:01244152516" className="flex-1 bg-white text-slate-900 h-14 rounded-2xl flex items-center justify-center gap-2 font-black shadow-2xl border border-slate-100">
             <Phone className="w-5 h-5 text-indigo-600" /> Call
           </a>
           <Link to="/contact" className="flex-[2] bg-indigo-600 text-white h-14 rounded-2xl flex items-center justify-center gap-2 font-black shadow-2xl shadow-indigo-600/30">
@@ -394,17 +394,17 @@ const Home: React.FC = () => {
             </div>
             <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="p-10 bg-white/5 rounded-[2.5rem] border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-colors">
-                <div className="text-5xl font-black text-indigo-400 mb-2">12k+</div>
+                <div className="text-5xl font-black text-indigo-400 mb-2">40,000+</div>
                 <div className="text-white font-bold text-xl mb-2">Active Clients</div>
                 <p className="text-slate-500 text-sm">Managing ongoing monthly compliances for diverse industries.</p>
               </div>
               <div className="p-10 bg-white/5 rounded-[2.5rem] border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-colors">
-                <div className="text-5xl font-black text-indigo-400 mb-2">₹10Cr+</div>
-                <div className="text-white font-bold text-xl mb-2">Tax Savings</div>
-                <p className="text-slate-500 text-sm">Helped clients optimize their tax structures and claim maximum IT deductions.</p>
+                <div className="text-5xl font-black text-indigo-400 mb-2">45,000+</div>
+                <div className="text-white font-bold text-xl mb-2">IPR Applications</div>
+                <p className="text-slate-500 text-sm">Expertly filed and tracked trademarks, copyrights, and patents across India.</p>
               </div>
               <div className="p-10 bg-white/5 rounded-[2.5rem] border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-colors">
-                <div className="text-5xl font-black text-indigo-400 mb-2">450+</div>
+                <div className="text-5xl font-black text-indigo-400 mb-2">680</div>
                 <div className="text-white font-bold text-xl mb-2">In-house Experts</div>
                 <p className="text-slate-500 text-sm">A dedicated team of CAs, CS, Lawyers, and Financial Advisors.</p>
               </div>
@@ -473,7 +473,7 @@ const Home: React.FC = () => {
       {/* Client Logos Infinite Marquee */}
       <section className="py-20 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-          <p className="text-center text-slate-400 font-black uppercase tracking-widest text-xs">Trusted by 12,000+ Companies</p>
+          <p className="text-center text-slate-400 font-black uppercase tracking-widest text-xs">Trusted by 40,000+ Companies</p>
         </div>
 
         <div className="relative flex overflow-x-hidden">
@@ -629,7 +629,7 @@ const Home: React.FC = () => {
               </div>
               <h2 className="text-4xl md:text-6xl font-black leading-[1.1] tracking-tight">Ready to Build Something Majestic?</h2>
               <p className="text-indigo-100 text-xl md:text-2xl leading-relaxed font-medium">
-                Join 12,000+ entrepreneurs who trust us with their legal and compliance foundations. Let's start your journey today.
+                Join 40,000+ entrepreneurs who trust us with their legal and compliance foundations. Let's start your journey today.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
                 <Link to="/contact" className="w-full sm:w-auto px-12 py-6 bg-white text-indigo-600 rounded-2xl font-black text-xl hover:bg-slate-50 transition-all shadow-2xl hover:scale-105 active:scale-95">

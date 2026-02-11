@@ -48,15 +48,22 @@ const Contact: React.FC = () => {
                 <div className="flex items-start gap-4">
                   <Phone className="w-6 h-6 text-indigo-200 mt-1" />
                   <div>
-                    <div className="font-bold">Call Us</div>
-                    <div className="text-indigo-100">+91 9899977311</div>
+                    <div className="font-bold">Call Sales</div>
+                    <div className="text-indigo-100 italic">0124 - 4152516, +91 9899977311</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Phone className="w-6 h-6 text-indigo-200 mt-1" />
+                  <div>
+                    <div className="font-bold">Call Support</div>
+                    <div className="text-indigo-100 italic">0124 - 4606264, 98999919071</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <Mail className="w-6 h-6 text-indigo-200 mt-1" />
                   <div>
                     <div className="font-bold">Email Us</div>
-                    <div className="text-indigo-100">hello@majesticgroups.com</div>
+                    <div className="text-indigo-100">support@majesticgroups.org</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -73,8 +80,7 @@ const Contact: React.FC = () => {
                   <Clock className="w-5 h-5" /> Working Hours
                 </h4>
                 <div className="text-sm text-indigo-100">
-                  <p>Mon - Fri: 9:00 AM - 7:00 PM</p>
-                  <p>Saturday: 10:00 AM - 2:00 PM</p>
+                  <p>Mon - Sat: 9:00 AM - 8:00 PM</p>
                   <p>Sunday: Closed</p>
                 </div>
               </div>
