@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { GoogleGenAI } from '@google/genai';
-import { 
-  Play, 
-  Sparkles, 
-  Film, 
-  Loader2, 
-  Download, 
-  AlertCircle, 
+import {
+  Play,
+  Sparkles,
+  Film,
+  Loader2,
+  Download,
+  AlertCircle,
   CheckCircle2,
   Video,
   Clapperboard,
@@ -21,19 +21,19 @@ const PROMO_TEMPLATES = [
     id: 'registration',
     name: 'Startup Launch',
     category: 'Business Registration',
-    prompt: 'A sleek, modern cinematic advertisement for a startup launching in India. High-quality 3D graphics of corporate buildings, documents flying into a digital folder, and a final shot of a successful entrepreneur smiling at a desk with a "Majestic Groups" logo on a laptop screen. Lighting is professional and warm.',
+    prompt: 'A sleek, modern cinematic advertisement for a startup launching in India. High-quality 3D graphics of corporate buildings, documents flying into a digital folder, and a final shot of a successful entrepreneur smiling at a desk with a "Majestic Group" logo on a laptop screen. Lighting is professional and warm.',
   },
   {
     id: 'tax',
     name: 'Tax Compliance',
     category: 'Tax & Accounting',
-    prompt: 'A dynamic video ad showing a busy professional looking stressed with papers, then transitioning to a calm office with a digital tax dashboard. A neon "Tax Simplified" sign glows. Cinematic close-ups of golden coins stacking up and a "Majestic Groups" gold seal appearing at the end.',
+    prompt: 'A dynamic video ad showing a busy professional looking stressed with papers, then transitioning to a calm office with a digital tax dashboard. A neon "Tax Simplified" sign glows. Cinematic close-ups of golden coins stacking up and a "Majestic Group" gold seal appearing at the end.',
   },
   {
     id: 'ip',
     name: 'IP Protection',
     category: 'Intellectual Property',
-    prompt: 'Abstract cinematic representation of an idea. A glowing lightbulb protected by an unbreakable crystalline shield. The camera pans around the shield. "Majestic Groups" text appears in elegant silver letters. Futuristic and high-tech aesthetics.',
+    prompt: 'Abstract cinematic representation of an idea. A glowing lightbulb protected by an unbreakable crystalline shield. The camera pans around the shield. "Majestic Group" text appears in elegant silver letters. Futuristic and high-tech aesthetics.',
   }
 ];
 
@@ -80,7 +80,7 @@ const VideoPromoMaker: React.FC = () => {
     try {
       // Create a new GoogleGenAI instance right before making an API call to ensure it uses the latest key
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      
+
       let operation = await ai.models.generateVideos({
         model: 'veo-3.1-fast-generate-preview',
         prompt: selectedTemplate.prompt,
@@ -133,7 +133,7 @@ const VideoPromoMaker: React.FC = () => {
   return (
     <div className="bg-slate-900 rounded-[3rem] p-8 md:p-16 relative overflow-hidden shadow-3xl border border-white/5">
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-      
+
       <div className="relative z-10">
         <div className="flex flex-col lg:flex-row gap-16">
           {/* Left Side: Controls */}
@@ -156,11 +156,10 @@ const VideoPromoMaker: React.FC = () => {
                   <button
                     key={tpl.id}
                     onClick={() => setSelectedTemplate(tpl)}
-                    className={`p-5 rounded-2xl border transition-all text-left flex items-center justify-between group ${
-                      selectedTemplate.id === tpl.id 
-                      ? 'bg-indigo-600 border-indigo-400 shadow-xl shadow-indigo-600/20' 
-                      : 'bg-white/5 border-white/10 hover:bg-white/10'
-                    }`}
+                    className={`p-5 rounded-2xl border transition-all text-left flex items-center justify-between group ${selectedTemplate.id === tpl.id
+                        ? 'bg-indigo-600 border-indigo-400 shadow-xl shadow-indigo-600/20'
+                        : 'bg-white/5 border-white/10 hover:bg-white/10'
+                      }`}
                   >
                     <div>
                       <div className={`font-black mb-1 ${selectedTemplate.id === tpl.id ? 'text-white' : 'text-slate-200'}`}>
@@ -196,7 +195,7 @@ const VideoPromoMaker: React.FC = () => {
                   </>
                 )}
               </button>
-              
+
               <div className="flex items-center justify-between text-[10px] text-slate-500 font-bold uppercase tracking-widest px-2">
                 <span className="flex items-center gap-1.5"><Video className="w-3 h-3" /> 720p Cinematic</span>
                 <span className="flex items-center gap-1.5"><Timer className="w-3 h-3" /> ~2 min wait</span>
@@ -208,7 +207,7 @@ const VideoPromoMaker: React.FC = () => {
                 <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                 <div className="space-y-3">
                   <p className="text-red-400 text-sm font-medium">{error}</p>
-                  <button 
+                  <button
                     onClick={handleOpenKeySelector}
                     className="text-white bg-red-500 px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 hover:bg-red-600 transition-colors"
                   >
@@ -239,15 +238,15 @@ const VideoPromoMaker: React.FC = () => {
                 </div>
               ) : videoUrl ? (
                 <div className="w-full h-full group/player relative">
-                  <video 
-                    src={videoUrl} 
-                    controls 
-                    autoPlay 
+                  <video
+                    src={videoUrl}
+                    controls
+                    autoPlay
                     className="w-full h-full object-cover rounded-[2.5rem]"
                   />
                   <div className="absolute top-6 right-6 opacity-0 group-hover/player:opacity-100 transition-opacity">
-                    <a 
-                      href={videoUrl} 
+                    <a
+                      href={videoUrl}
                       download="majestic-promo.mp4"
                       className="bg-white/10 backdrop-blur-md text-white p-4 rounded-full border border-white/20 hover:bg-white/20 transition-all flex items-center gap-2 font-bold"
                     >
@@ -271,7 +270,7 @@ const VideoPromoMaker: React.FC = () => {
                 </div>
               )}
             </div>
-            
+
             <div className="mt-8 grid grid-cols-3 gap-4">
               <div className="p-6 bg-white/5 rounded-3xl border border-white/5 text-center space-y-2">
                 <div className="text-indigo-400 font-black text-lg">1080p</div>

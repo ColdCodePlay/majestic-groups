@@ -357,7 +357,7 @@ const InvoiceGenerator = () => {
                         {/* Footer */}
                         <div className="mt-20 pt-8 border-t border-slate-100 text-center text-xs text-slate-400">
                             <p className="font-medium">Thank you for your business!</p>
-                            <p className="mt-2">Generated via Majestic Groups</p>
+                            <p className="mt-2">Generated via Majestic Group</p>
                         </div>
                     </div>
                 </div>

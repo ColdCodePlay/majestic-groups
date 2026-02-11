@@ -176,7 +176,7 @@ export const CATEGORY_ICONS: Record<string, React.ReactNode> = {
 export const TESTIMONIALS = [
   {
     id: 1,
-    content: "Majestic Groups made our company incorporation incredibly smooth. Their team of experts handled everything from DSC to PAN/TAN while keeping us updated at every step. Truly the best in India.",
+    content: "Majestic Group made our company incorporation incredibly smooth. Their team of experts handled everything from DSC to PAN/TAN while keeping us updated at every step. Truly the best in India.",
     author: "Aditya Verma",
     role: "CEO, TechFlow Solutions",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&q=80&w=100&h=100",
@@ -200,7 +200,7 @@ export const TESTIMONIALS = [
   },
   {
     id: 4,
-    content: "Trademarking our brand seemed daunting until we found Majestic Groups. Their exhaustive search and filing support were top-notch. Our brand is now legally secure.",
+    content: "Trademarking our brand seemed daunting until we found Majestic Group. Their exhaustive search and filing support were top-notch. Our brand is now legally secure.",
     author: "Sneha Kapur",
     role: "CEO, Bloom Organic",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?fit=crop&q=80&w=100&h=100",

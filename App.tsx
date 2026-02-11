@@ -32,6 +32,9 @@ import AdminPricing from './pages/admin/AdminPricing';
 import AdminCRM from './pages/admin/AdminCRM';
 import AdminAgents from './pages/admin/AdminAgents';
 import AdminSettings from './pages/admin/AdminSettings';
+import DigitalSolutions from './pages/DigitalSolutions';
+import TMSearch from './pages/TMSearch';
+import TMStatus from './pages/TMStatus';
 import { DataProvider } from './context/DataContext';
 import AIAssistant from './components/AIAssistant';
 
@@ -51,6 +54,15 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
     { name: 'Compliance', path: '/compliance' },
+    { name: 'Digital Solutions', path: '/digital-solutions' },
+    {
+      name: 'IPR',
+      path: '#',
+      children: [
+        { name: 'TM Search', path: '/tm-search' },
+        { name: 'TM Status Check', path: '/tm-status' },
+      ]
+    },
     {
       name: 'Tools',
       path: '#',
@@ -79,7 +91,7 @@ const Navbar = () => {
             <Link to="/" className="flex items-center space-x-2 group">
               <img
                 src="/logo_main.png?v=2"
-                alt="Majestic Groups"
+                alt="Majestic Group"
                 className="h-16 sm:h-20 w-auto object-contain transition-all duration-500 group-hover:drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]"
               />
             </Link>
@@ -232,7 +244,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-indigo-500 rounded flex items-center justify-center">
                 <span className="text-white font-bold text-lg">M</span>
               </div>
-              <span className="text-xl font-bold tracking-tight">Majestic Groups</span>
+              <span className="text-xl font-bold tracking-tight">Majestic Group</span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed">
               India's leading platform for business registration, taxation, and legal compliance. We simplify complexity so you can focus on growth.
@@ -287,7 +299,7 @@ const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-slate-800 text-center text-slate-500 text-xs">
-          <p>© {new Date().getFullYear()} Majestic Groups. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Majestic Group. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -345,6 +357,11 @@ const AppContent = () => {
             <Route path="/admin/agents" element={<AdminAgents />} />
             <Route path="/admin/settings" element={<AdminSettings />} />
           </Route>
+
+          {/* New Public Routes */}
+          <Route path="/digital-solutions" element={<DigitalSolutions />} />
+          <Route path="/tm-search" element={<TMSearch />} />
+          <Route path="/tm-status" element={<TMStatus />} />
         </Routes>
       </main>
       {!isAdminPath && <Footer />}

@@ -1,5 +1,4 @@
-
-# 🏛️ Majestic Groups | Business & Legal Services Platform
+# 🏛️ Majestic Group | Business & Legal Services Platform
 
 A comprehensive digital platform simplifying business registration, legal compliance, and tax filings for Indian entrepreneurs. This application bridges the gap between complex legal frameworks and user-friendly digital experiences.
 
@@ -81,4 +80,4 @@ src/
 
 ## 📜 License
 
-© 2026 Majestic Groups. All rights reserved.
+© 2026 Majestic Group. All rights reserved.

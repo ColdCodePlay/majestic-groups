@@ -11,7 +11,7 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6">Empowering Entrepreneurs Since 2015</h1>
           <p className="text-xl text-indigo-100 max-w-3xl mx-auto leading-relaxed">
-            Majestic Groups was founded with a single mission: to make legal and tax compliance simple, accessible, and affordable for every Indian business owner.
+            Majestic Group was founded with a single mission: to make legal and tax compliance simple, accessible, and affordable for every Indian business owner.
           </p>
         </div>
       </section>

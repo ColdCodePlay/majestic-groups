@@ -1,6 +1,5 @@
-
 {
-  "name": "Majestic Groups",
+  "name": "Majestic Group",
   "description": "A comprehensive business, legal, tax, and compliance services platform for startups, SMEs, and professionals in India.",
   "requestFramePermissions": [
     "camera",

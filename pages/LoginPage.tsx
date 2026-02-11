@@ -50,7 +50,7 @@ const LoginPage = () => {
                         <div className="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center mb-6">
                             <span className="text-white font-bold text-2xl">M</span>
                         </div>
-                        <h1 className="text-4xl font-black mb-4 tracking-tight">Majestic Groups</h1>
+                        <h1 className="text-4xl font-black mb-4 tracking-tight">Majestic Group</h1>
                         <p className="text-slate-400 text-lg">Admin Control Center</p>
                     </div>
 

@@ -67,7 +67,7 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="pt-8 border-t border-indigo-500/50 space-y-4">
                 <h4 className="font-bold flex items-center gap-2">
                   <Clock className="w-5 h-5" /> Working Hours
@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
                   <p className="text-slate-600 max-w-md mx-auto">
                     Thank you for reaching out. One of our experts will call you back within the next 24 hours.
                   </p>
-                  <button 
+                  <button
                     onClick={() => setIsSubmitted(false)}
                     className="text-indigo-600 font-bold hover:underline"
                   >
@@ -114,22 +114,22 @@ const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700">Full Name</label>
-                      <input 
+                      <input
                         required
-                        type="text" 
+                        type="text"
                         value={formState.name}
-                        onChange={(e) => setFormState({...formState, name: e.target.value})}
+                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                         placeholder="John Doe"
                         className="w-full px-5 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-100 focus:border-indigo-600 outline-none transition-all"
                       />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700">Phone Number</label>
-                      <input 
+                      <input
                         required
-                        type="tel" 
+                        type="tel"
                         value={formState.phone}
-                        onChange={(e) => setFormState({...formState, phone: e.target.value})}
+                        onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
                         placeholder="+91 9899977311"
                         className="w-full px-5 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-100 focus:border-indigo-600 outline-none transition-all"
                       />
@@ -138,20 +138,20 @@ const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700">Email Address</label>
-                      <input 
+                      <input
                         required
-                        type="email" 
+                        type="email"
                         value={formState.email}
-                        onChange={(e) => setFormState({...formState, email: e.target.value})}
+                        onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                         placeholder="john@example.com"
                         className="w-full px-5 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-100 focus:border-indigo-600 outline-none transition-all"
                       />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700">Interested Service</label>
-                      <select 
+                      <select
                         value={formState.service}
-                        onChange={(e) => setFormState({...formState, service: e.target.value})}
+                        onChange={(e) => setFormState({ ...formState, service: e.target.value })}
                         className="w-full px-5 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-100 focus:border-indigo-600 outline-none transition-all"
                       >
                         <option>Business Registration</option>
@@ -164,15 +164,15 @@ const Contact: React.FC = () => {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-slate-700">Your Message</label>
-                    <textarea 
+                    <textarea
                       rows={5}
                       value={formState.message}
-                      onChange={(e) => setFormState({...formState, message: e.target.value})}
+                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                       placeholder="Tell us about your requirements..."
                       className="w-full px-5 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-100 focus:border-indigo-600 outline-none transition-all resize-none"
                     ></textarea>
                   </div>
-                  <button 
+                  <button
                     type="submit"
                     className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold text-lg hover:bg-indigo-700 transition-all shadow-lg flex items-center justify-center gap-2"
                   >
@@ -187,20 +187,20 @@ const Contact: React.FC = () => {
 
       {/* Interactive Map Section */}
       <section className="relative h-[500px] w-full bg-slate-100">
-        <iframe 
+        <iframe
           title="Office Location"
           src={`https://maps.google.com/maps?q=${latitude},${longitude}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
-          width="100%" 
-          height="100%" 
-          style={{ border: 0 }} 
-          allowFullScreen={true} 
-          loading="lazy" 
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen={true}
+          loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           className="grayscale brightness-90 hover:grayscale-0 transition-all duration-700"
         ></iframe>
-        
+
         <div className="absolute bottom-8 left-8 z-10">
-          <a 
+          <a
             href={googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -210,7 +210,7 @@ const Contact: React.FC = () => {
               <MapPin className="w-8 h-8" />
             </div>
             <div>
-              <div className="font-black text-slate-900 text-lg">Majestic Groups HQ</div>
+              <div className="font-black text-slate-900 text-lg">Majestic Group HQ</div>
               <div className="text-slate-500 text-sm mb-2 max-w-[240px]">Basai Rd, near Bank of Baroda, Gurugram</div>
               <div className="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-widest">
                 Open in Google Maps <ExternalLink className="w-3.5 h-3.5" />
