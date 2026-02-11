@@ -242,7 +242,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     plan: leadData.plan,
                     price: leadData.price,
                     status: 'New',
-                    source: 'Website',
+                    source: leadData.source || 'Website',
                     comments: [],
                     items: leadData.items
                 }])
