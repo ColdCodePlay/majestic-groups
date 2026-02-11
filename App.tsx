@@ -11,7 +11,8 @@ import {
   Linkedin,
   ArrowRight,
   Bot,
-  ChevronDown // Added ChevronDown
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Home from './pages/Home';
@@ -43,6 +44,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null); // Track active dropdown
+  const [expandedSubMenu, setExpandedSubMenu] = useState<string | null>(null); // Track mobile sub-dropdowns
   const location = useLocation();
 
   useEffect(() => {
@@ -60,10 +62,15 @@ const Navbar = () => {
       name: 'IPR',
       path: '#',
       children: [
-        { name: 'Trademark', path: '#', disabled: true },
-        { name: 'TM Search', path: '/tm-search' },
-        { name: 'TM Status', path: '/tm-status' },
-        { name: 'TM Classes', path: '/tm-classes' },
+        {
+          name: 'Trademark',
+          path: '#',
+          children: [
+            { name: 'TM Search', path: '/tm-search' },
+            { name: 'TM Status', path: '/tm-status' },
+            { name: 'TM Classes', path: '/tm-classes' },
+          ]
+        },
         { name: 'Patent Search', path: 'https://iprsearch.ipindia.gov.in/PublicSearch/', external: true },
         { name: 'Copyright Search', path: 'https://copyright.gov.in/SearchRoc.aspx', external: true },
       ]
@@ -112,9 +119,26 @@ const Navbar = () => {
                   >
                     {link.name} <ChevronDown className="w-4 h-4" />
                     {/* Dropdown Menu */}
-                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left">
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left">
                       {link.children.map(child => (
-                        child.disabled ? (
+                        child.children ? (
+                          <div key={child.name} className="relative group/sub">
+                            <button className="w-full flex items-center justify-between px-4 py-3 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 font-bold text-sm transition-colors text-left">
+                              {child.name} <ChevronRight className="w-4 h-4" />
+                            </button>
+                            <div className="absolute top-0 left-full ml-px w-56 bg-white rounded-xl shadow-xl border border-slate-100 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 transform origin-top-left">
+                              {child.children.map(subChild => (
+                                <Link
+                                  key={subChild.path}
+                                  to={subChild.path}
+                                  className="block px-4 py-3 text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 font-bold text-sm transition-colors"
+                                >
+                                  {subChild.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ) : child.disabled ? (
                           <div
                             key={child.name}
                             className="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-indigo-600 bg-indigo-50/50"
@@ -196,7 +220,30 @@ const Navbar = () => {
                       </div>
                       <div className="pl-4 border-l-2 border-slate-100 ml-4 space-y-1">
                         {link.children.map(child => (
-                          child.disabled ? (
+                          child.children ? (
+                            <div key={child.name} className="space-y-1">
+                              <button
+                                onClick={() => setExpandedSubMenu(expandedSubMenu === child.name ? null : child.name)}
+                                className="w-full flex items-center justify-between px-4 py-3 text-slate-600 font-bold hover:text-indigo-600 pl-6"
+                              >
+                                {child.name} <ChevronDown className={`w-4 h-4 transition-transform ${expandedSubMenu === child.name ? 'rotate-180' : ''}`} />
+                              </button>
+                              {expandedSubMenu === child.name && (
+                                <div className="pl-6 space-y-1 bg-slate-50/50 rounded-xl">
+                                  {child.children.map(subChild => (
+                                    <Link
+                                      key={subChild.path}
+                                      to={subChild.path}
+                                      onClick={() => setIsOpen(false)}
+                                      className="block px-4 py-3 text-slate-500 font-bold hover:text-indigo-600"
+                                    >
+                                      {subChild.name}
+                                    </Link>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          ) : child.disabled ? (
                             <div
                               key={child.name}
                               className="px-4 py-3 text-[10px] font-black uppercase tracking-widest text-indigo-600"
