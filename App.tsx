@@ -370,6 +370,7 @@ const Footer = () => {
               <li><Link to="/contact" className="hover:text-indigo-400 transition-colors">Contact Support</Link></li>
               <li><a href="#" className="hover:text-indigo-400 transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-indigo-400 transition-colors">Terms of Service</a></li>
+              <li><a href="https://mail.hostinger.com/v2/auth/login" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 transition-colors">Login</a></li>
               <li><Link to="/admin" className="hover:text-indigo-400 transition-colors border-t border-slate-800 pt-3 block mt-4">Admin Login</Link></li>
             </ul>
           </div>
