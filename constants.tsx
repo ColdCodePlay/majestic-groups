@@ -209,14 +209,26 @@ export const TESTIMONIALS = [
 ];
 
 export const COMPANY_LOGOS = [
-  { name: "TechFlow", color: "text-indigo-600" },
-  { name: "GreenGrid", color: "text-emerald-600" },
-  { name: "ZetaPay", color: "text-violet-600" },
-  { name: "Bloom", color: "text-pink-600" },
-  { name: "Nexus", color: "text-blue-600" },
-  { name: "Astra", color: "text-purple-600" },
-  { name: "FinEdge", color: "text-cyan-600" },
-  { name: "CoreStack", color: "text-slate-600" },
+  { name: "Alka Laboratories", logoUrl: "/logos/alka.png", color: "text-blue-800" },
+  // Batch Uploaded Logos
+  { name: "Partner 1", logoUrl: "/logos/1.png", color: "text-slate-600" },
+  { name: "Partner 2", logoUrl: "/logos/2.png", color: "text-slate-600" },
+  { name: "Partner 3", logoUrl: "/logos/3.png", color: "text-slate-600" },
+  { name: "Partner 5", logoUrl: "/logos/5.png", color: "text-slate-600" },
+  { name: "Partner 6", logoUrl: "/logos/6.png", color: "text-slate-600" },
+  { name: "Partner 7", logoUrl: "/logos/7.png", color: "text-slate-600" },
+  { name: "Partner 8", logoUrl: "/logos/8.png", color: "text-slate-600" },
+  { name: "Partner 9", logoUrl: "/logos/9.png", color: "text-slate-600" },
+  { name: "Partner 10", logoUrl: "/logos/10.png", color: "text-slate-600" },
+  { name: "Partner 11", logoUrl: "/logos/11.png", color: "text-slate-600" },
+  { name: "Partner 12", logoUrl: "/logos/12.png", color: "text-slate-600" },
+  { name: "Partner 13", logoUrl: "/logos/13.png", color: "text-slate-600" },
+  { name: "Partner 14", logoUrl: "/logos/14.png", color: "text-slate-600" },
+  { name: "Partner 15", logoUrl: "/logos/15.png", color: "text-slate-600" },
+  { name: "Partner 16", logoUrl: "/logos/16.png", color: "text-slate-600" },
+  { name: "Partner 17", logoUrl: "/logos/17.png", color: "text-slate-600" },
+  { name: "Partner 18", logoUrl: "/logos/18.png", color: "text-slate-600" },
+  { name: "Partner 19", logoUrl: "/logos/19.png", color: "text-slate-600" },
 ];
 
 export const CALCULATOR_COMPONENTS = [

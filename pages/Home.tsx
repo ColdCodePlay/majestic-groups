@@ -479,25 +479,23 @@ const Home: React.FC = () => {
         <div className="relative flex overflow-x-hidden">
           <div className="flex animate-marquee whitespace-nowrap py-4">
             {[...COMPANY_LOGOS, ...COMPANY_LOGOS].map((logo, idx) => (
-              <div key={idx} className="mx-8 flex items-center gap-2 group">
-                <div className={`w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center font-black text-xl ${logo.color} group-hover:scale-110 transition-transform shadow-sm`}>
-                  {logo.name[0]}
-                </div>
-                <span className="text-2xl font-black text-slate-300 group-hover:text-slate-900 transition-colors tracking-tighter">
-                  {logo.name}
-                </span>
+              <div key={idx} className="mx-8 flex items-center justify-center bg-white rounded-xl p-4 w-48 h-48 shadow-sm border border-slate-100 group hover:shadow-md transition-all">
+                <img
+                  src={(logo as any).logoUrl}
+                  alt={logo.name}
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
             ))}
           </div>
           <div className="absolute top-0 flex animate-marquee2 whitespace-nowrap py-4">
             {[...COMPANY_LOGOS, ...COMPANY_LOGOS].map((logo, idx) => (
-              <div key={idx} className="mx-8 flex items-center gap-2 group">
-                <div className={`w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center font-black text-xl ${logo.color} group-hover:scale-110 transition-transform shadow-sm`}>
-                  {logo.name[0]}
-                </div>
-                <span className="text-2xl font-black text-slate-300 group-hover:text-slate-900 transition-colors tracking-tighter">
-                  {logo.name}
-                </span>
+              <div key={idx} className="mx-8 flex items-center justify-center bg-white rounded-xl p-4 w-48 h-48 shadow-sm border border-slate-100 group hover:shadow-md transition-all">
+                <img
+                  src={(logo as any).logoUrl}
+                  alt={logo.name}
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
             ))}
           </div>
@@ -515,10 +513,10 @@ const Home: React.FC = () => {
             100% { transform: translateX(0%); }
           }
           .animate-marquee {
-            animation: marquee 30s linear infinite;
+            animation: marquee 60s linear infinite;
           }
           .animate-marquee2 {
-            animation: marquee2 30s linear infinite;
+            animation: marquee2 60s linear infinite;
           }
         `}} />
       </section>
