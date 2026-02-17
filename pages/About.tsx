@@ -9,9 +9,13 @@ const About: React.FC = () => {
       <section className="bg-indigo-900 text-white py-24 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://picsum.photos/seed/legal/1920/1080')] opacity-20 bg-cover bg-center"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6">Empowering Entrepreneurs Since 2015</h1>
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6">India's Largest Business Consulting Firm</h1>
           <p className="text-xl text-indigo-100 max-w-3xl mx-auto leading-relaxed">
-            Majestic Group was founded with a single mission: to make legal and tax compliance simple, accessible, and affordable for every Indian business owner.
+            Provides of your business requirements on a national basis incorporated in December 2014. We provide an end-to-end solution for your business - helping and developing the company you have without leading to panic.
+            <br /><br />
+            We are your one-stop solution for all your business needs. Our team of experts has a deep understanding of the Indian market and its dynamics. We provide customized solutions to help you grow and sustain your business in this competitive environment.
+            <br /><br />
+            We have a Pan-India presence, operating through 10+ branches and serving more than 20,000 happy customers. Please let us explore the services we offer and their details, we hope you'll find our assistance valuable to your business's growth.
           </p>
         </div>
       </section>
@@ -26,7 +30,7 @@ const About: React.FC = () => {
               </div>
               <h2 className="text-3xl font-bold text-slate-900">Our Mission</h2>
               <p className="text-slate-600 leading-relaxed">
-                To bridge the gap between complex legal requirements and enthusiastic entrepreneurs by providing technology-driven, human-supported compliance solutions that foster business growth.
+                To provide reliable, timely & value added solutions that will be helps our clients achieve their objective. Our aim is to exceed the expectations in everything what we do.
               </p>
             </div>
             <div className="space-y-4">
@@ -35,7 +39,7 @@ const About: React.FC = () => {
               </div>
               <h2 className="text-3xl font-bold text-slate-900">Our Vision</h2>
               <p className="text-slate-600 leading-relaxed">
-                To be India's most trusted partner for end-to-end business services, known for integrity, transparency, and a customer-first approach in everything we do.
+                Our vision is to be a leading consulting firm operating world wide. Our success is measured by the values, we deliver to clients, the quality of the staff we employ, and our strength & spirit as a firm. We nurture our core values and they shape the culture of our business and define the character of our firm. They guide our decision making, our relationship with each other. Our people adopt, own and apply our value in their work.
               </p>
             </div>
           </div>
@@ -74,31 +78,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-extrabold text-slate-900 mb-4">Led by Experts</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Our leadership brings decades of experience from legal, financial, and technology backgrounds.</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { name: "Rahul Sharma", role: "Founder & CEO", img: "https://picsum.photos/seed/man1/400/500" },
-              { name: "Priya Mehta", role: "Head of Legal", img: "https://picsum.photos/seed/woman1/400/500" },
-              { name: "Vikram Singh", role: "Chief Financial Officer", img: "https://picsum.photos/seed/man2/400/500" },
-              { name: "Ananya Iyer", role: "Head of Operations", img: "https://picsum.photos/seed/woman2/400/500" }
-            ].map((m, i) => (
-              <div key={i} className="group">
-                <div className="relative aspect-[4/5] rounded-3xl overflow-hidden mb-4 grayscale group-hover:grayscale-0 transition-all duration-500 shadow-lg">
-                  <img src={m.img} alt={m.name} className="w-full h-full object-cover" />
-                </div>
-                <h4 className="text-xl font-bold text-slate-900">{m.name}</h4>
-                <p className="text-indigo-600 font-medium text-sm">{m.role}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
     </div>
   );
 };

@@ -209,11 +209,12 @@ export const TESTIMONIALS = [
 ];
 
 export const COMPANY_LOGOS = [
-  { name: "Alka Laboratories", logoUrl: "/logos/alka.png", color: "text-blue-800" },
+  // { name: "Alka Laboratories", logoUrl: "/logos/alka.png", color: "text-blue-800" }, // File not found in directory
   // Batch Uploaded Logos
   { name: "Partner 1", logoUrl: "/logos/1.png", color: "text-slate-600" },
   { name: "Partner 2", logoUrl: "/logos/2.png", color: "text-slate-600" },
   { name: "Partner 3", logoUrl: "/logos/3.png", color: "text-slate-600" },
+  { name: "Partner 4", logoUrl: "/logos/4.png", color: "text-slate-600" },
   { name: "Partner 5", logoUrl: "/logos/5.png", color: "text-slate-600" },
   { name: "Partner 6", logoUrl: "/logos/6.png", color: "text-slate-600" },
   { name: "Partner 7", logoUrl: "/logos/7.png", color: "text-slate-600" },
@@ -229,6 +230,10 @@ export const COMPANY_LOGOS = [
   { name: "Partner 17", logoUrl: "/logos/17.png", color: "text-slate-600" },
   { name: "Partner 18", logoUrl: "/logos/18.png", color: "text-slate-600" },
   { name: "Partner 19", logoUrl: "/logos/19.png", color: "text-slate-600" },
+  { name: "Partner 20", logoUrl: "/logos/20.png", color: "text-slate-600" },
+  { name: "Partner 21", logoUrl: "/logos/21.png", color: "text-slate-600" },
+  { name: "Partner 22", logoUrl: "/logos/22.png", color: "text-slate-600" },
+  { name: "Partner 23", logoUrl: "/logos/23.png", color: "text-slate-600" },
 ];
 
 export const CALCULATOR_COMPONENTS = [

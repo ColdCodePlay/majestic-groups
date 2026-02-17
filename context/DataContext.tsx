@@ -247,7 +247,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     items: leadData.items
                 }])
                 .select()
-                .single();
+                .maybeSingle();
 
             if (error) throw error;
 
@@ -268,10 +268,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 };
                 setLeads(prev => [createdLead, ...prev]);
                 return createdLead;
+            } else {
+                // Public submission succeeded but RLS prevented reading back the data.
+                // This is expected for anonymous users.
+                console.warn('Lead inserted but could not retrieve data due to RLS policies.');
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error adding lead:', error);
-            alert('Failed to save lead to database. Please try again.');
+            alert(`Failed to save lead: ${error.message || 'Unknown error'}`);
         }
         return newLead;
     };
